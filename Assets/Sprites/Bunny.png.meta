@@ -1,9 +1,25 @@
 fileFormatVersion: 2
-guid: ff25cdf9cb1d6284d966aad59eb8b6a1
-timeCreated: 1510294819
+guid: e1b978200a467ac48b699f2c2757b373
+timeCreated: 1510339190
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: bunny_head
+    21300002: bunny_ear1
+    21300004: bunny_body
+    21300006: bunny_bLeg1
+    21300008: bunny_fLeg1
+    21300010: bunny_bLeg2
+    21300012: bunny_ear2
+    21300014: bunny_fLeg2
+    21300016: bunny_head
+    21300018: bunny_LEar
+    21300020: bunny_body
+    21300022: bunny_LBLeg
+    21300024: bunny_RFLeg
+    21300026: bunny_REar
+    21300028: bunny_RBLeg
+    21300030: bunny_LFLeg
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +50,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -68,9 +84,113 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: bunny_head
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48.370857
+        width: 58.572884
+        height: 63.629143
+      alignment: 9
+      pivot: {x: 0.45242777, y: 0.23619907}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_LEar
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 40
+        width: 53.497948
+        height: 72
+      alignment: 9
+      pivot: {x: 0.7246852, y: 0.91899234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_body
+      rect:
+        serializedVersion: 2
+        x: 86.08901
+        y: 21.20845
+        width: 65.91099
+        height: 90.79155
+      alignment: 9
+      pivot: {x: 0.5372547, y: 0.94272596}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_LBLeg
+      rect:
+        serializedVersion: 2
+        x: 10.000001
+        y: 1.000001
+        width: 61
+        height: 34.999996
+      alignment: 9
+      pivot: {x: 0.1781857, y: 0.5300471}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_RFLeg
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 65
+        height: 30
+      alignment: 9
+      pivot: {x: 0.17102438, y: 0.55516446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_REar
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 40
+        width: 53.66475
+        height: 72
+      alignment: 9
+      pivot: {x: 0.72243243, y: 0.91899234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_RBLeg
+      rect:
+        serializedVersion: 2
+        x: 10.000001
+        y: 1.000001
+        width: 61
+        height: 34.999996
+      alignment: 9
+      pivot: {x: 0.1781857, y: 0.5300471}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bunny_LFLeg
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 65
+        height: 30
+      alignment: 9
+      pivot: {x: 0.17102438, y: 0.55516446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
-  userData: 
+  userData: 98981584589194
   assetBundleName: 
   assetBundleVariant: 

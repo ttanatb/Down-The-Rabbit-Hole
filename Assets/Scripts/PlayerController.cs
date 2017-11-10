@@ -2,22 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public float speed;
     public float rotationSpeed;
     private Rigidbody2D rb;
-	// Use this for initialization
-	void Start () {
+    private Vector3 direction;
+
+    public Transform headBone;      //the bone of the head
+    public Transform bodyBone;      //the bone for the body
+    public Transform[] earsIK;      //the IK controllers for the ears
+
+    //IK ears stuff
+    const float STARTING_X = -0.005f;
+    const float EAR_TRAVEL_DIST = 0.1f;
+
+    // Use this for initialization
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-	}
+    }
 
-    // Update is called once per frame
-    void Update() {
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+    // Fixed Update for physics
+    void FixedUpdate()
+    {
+        //direction of movement is combination of horizontal input and vertical input
+        direction = (Input.GetAxis("Horizontal") * Vector3.right + Input.GetAxis("Vertical") * Vector3.up).normalized;
 
-        rb.AddForce(direction * speed * Time.deltaTime);
+        //add acceleartion
+        rb.AddForce(direction * speed * Time.fixedDeltaTime);
+    }
 
+    // Update visual effects
+    private void Update()
+    {
+        UpdateBodyHeadOrientation();
+        AdjustEars();
+    }
 
-        
-	}
+    //Adjust the orietnation of the head & body orientation
+    void UpdateBodyHeadOrientation()
+    {
+        if (bodyBone && rb)
+        {
+            bodyBone.right = Vector3.Lerp(bodyBone.right, rb.velocity, Time.deltaTime * 15f);
+
+            if (headBone)
+                headBone.right = Vector3.Lerp(headBone.right, (bodyBone.right + direction) / 2f, Time.deltaTime * 5f);
+        }
+    }
+
+    //Adjusts the IK controllers that are controlling the ears
+    void AdjustEars()
+    {
+        foreach (Transform t in earsIK)
+        {
+            Vector3 locPos = t.localPosition;
+            locPos.x = STARTING_X - rb.velocity.sqrMagnitude * EAR_TRAVEL_DIST;
+            t.localPosition = locPos;
+        }
+    }
 }
