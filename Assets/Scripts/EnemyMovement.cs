@@ -18,7 +18,9 @@ public class EnemyMovement : MonoBehaviour
 
     #region Variables
     // Set this 
-    public EnemyType enemyType;
+    [SerializeField]
+    EnemyType enemyType;
+
     public List<GameObject> pathPoints;
     #endregion
 
@@ -26,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        EnemyMovement();
+        Move();
 	}
     #endregion
 
@@ -34,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// Movement method that is called for enemy Movement
     /// </summary>
-    void EnemyMovement()
+    void Move()
     {
         switch(enemyType)
         {
