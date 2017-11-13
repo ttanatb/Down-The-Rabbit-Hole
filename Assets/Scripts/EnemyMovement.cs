@@ -21,8 +21,17 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     EnemyType enemyType;
 
+    [SerializeField]
+    float rotationSpeed;
+
     public List<GameObject> pathPoints;
     #endregion
+
+
+    void Start()
+    {
+        Debug.Log("start");
+    }
 
     #region Update
     // Update is called once per frame
@@ -41,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
         switch(enemyType)
         {
             case EnemyType.Keeper:
-                // Rotate
+                KeeperRotate();
                 break;
 
             case EnemyType.Dhole:
@@ -63,4 +72,25 @@ public class EnemyMovement : MonoBehaviour
         }
     }
     #endregion
+
+    /// <summary>
+    /// Rotates the enemy towards the player if sensed
+    /// </summary>
+    void HearsPlayer(Vector3 playerPosition)
+    {
+        Vector3 dir = playerPosition - transform.position;
+        float angleOfRotation = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90;
+        transform.rotation = Quaternion.Euler(0, 0, angleOfRotation);
+    }
+
+    /// <summary>
+    /// Rotates the enemy unit slowly
+    /// </summary>
+    void KeeperRotate()
+    {
+        float zRotationVar = transform.eulerAngles.z;
+        zRotationVar += rotationSpeed;
+        Debug.Log(zRotationVar);
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
+    }
 }
