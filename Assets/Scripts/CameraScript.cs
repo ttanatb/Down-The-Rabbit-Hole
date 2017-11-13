@@ -8,9 +8,12 @@ public class CameraScript : MonoBehaviour {
     public float deadY;
     //player game object for the camera to follow
     public GameObject player;
+    //position storage vectors
     Vector3 playerPosition;
     Vector3 cameraPosition;
-    Vector3 velocity = Vector3.zero;
+
+    //damping velocity
+    //Vector3 velocity = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
