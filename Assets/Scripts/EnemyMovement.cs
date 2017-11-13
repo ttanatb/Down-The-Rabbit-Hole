@@ -21,15 +21,26 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     EnemyType enemyType;
 
+    // Rotation Variables
     [SerializeField]
     float rotationSpeed;
 
+    // Pathing Variables
+    [SerializeField]
+    float timeBetweenPoints;
+
+    private bool justMoved;
+    private int currentPathPoint;
     public List<GameObject> pathPoints;
     #endregion
 
 
     void Start()
     {
+        // Set current path point to it's first
+        currentPathPoint = 0;
+        justMoved = false;
+
         Debug.Log("start");
     }
 
@@ -54,7 +65,12 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case EnemyType.Dhole:
-                // Go to different spots, rotate slightly?
+                // Only move if the Dhole hasn't just moved.
+                if (justMoved == false)
+                {
+                    Invoke("DholeSwitchHoles", timeBetweenPoints);
+                    justMoved = true;
+                }
                 break;
 
             case EnemyType.Slug:
@@ -73,24 +89,57 @@ public class EnemyMovement : MonoBehaviour
     }
     #endregion
 
+
+    #region Specific Movement Methods
     /// <summary>
     /// Rotates the enemy towards the player if sensed
     /// </summary>
-    void HearsPlayer(Vector3 playerPosition)
+    void TurnTowardsPoint(Vector3 point)
     {
-        Vector3 dir = playerPosition - transform.position;
+        Vector3 dir = point - transform.position;
         float angleOfRotation = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90;
         transform.rotation = Quaternion.Euler(0, 0, angleOfRotation);
     }
 
     /// <summary>
-    /// Rotates the enemy unit slowly
+    /// Rotates the enemy unit slowly made for the keeper specifically
     /// </summary>
     void KeeperRotate()
     {
         float zRotationVar = transform.eulerAngles.z;
         zRotationVar += rotationSpeed;
-        Debug.Log(zRotationVar);
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
     }
+
+    /// <summary>
+    /// Rotates the enemy unit slowly
+    /// </summary>
+    void DholeSwitchHoles()
+    {
+        // Get the next hole number
+        int nextHoleNum = currentPathPoint+1;
+        nextHoleNum %= pathPoints.Count;
+
+        // Turn the Dhole towards the next spot
+        TurnTowardsPoint(pathPoints[nextHoleNum].transform.position);
+
+        // Move the dhole and update the currentPathPoint
+        currentPathPoint = nextHoleNum;
+        transform.position = pathPoints[currentPathPoint].transform.position;
+
+        Debug.Log(transform.position);
+
+        Invoke("ResetMovementVariable", timeBetweenPoints);
+    }
+
+    /// <summary>
+    /// Keeps the player from spamming the shoot button
+    /// </summary>
+    void ResetMovementVariable()
+    {
+        // Player Can't shoot for .5 seconds
+        //Debug.Log("We Just Shot!");
+        justMoved = false;
+    }
+    #endregion
 }
