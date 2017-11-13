@@ -4,13 +4,13 @@ using System;
 using UnityEngine;
 
 public class SightLine : MonoBehaviour {
-    Vector2 position;
-    Vector2 playerPosition;
-    Vector2 offset;
-    GameObject Player;
-    float offsetAngle;
-    float widthAngle;
-    float Radius;
+    Vector3 position;
+    Vector3 playerPosition;
+    Vector3 offset;
+    public GameObject Player;
+    public float offsetAngle;
+    public float widthAngle;
+    public float Radius;
 
 
     // Use this for initialization
@@ -20,10 +20,11 @@ public class SightLine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        position = gameObject.GetComponentInParent<Transform>().position;
-        playerPosition = Player.GetComponent<Transform>().position;
+        position = gameObject.transform.position;
+        playerPosition = Player.transform.position;
         offset = playerPosition - position;
-        if(offset.normalized.sqrMagnitude < Radius*Radius)//Circle Collision Check;
+        offsetAngle = gameObject.transform.rotation.z;        
+        if (offset.sqrMagnitude < Radius*Radius)//Circle Collision Check;
         {
             if (SightLineCheck())
             {
@@ -43,10 +44,16 @@ public class SightLine : MonoBehaviour {
         else
         {
             float rad = Mathf.Atan2(offset.y, offset.x);//Get the angle that the player is from the sightline's source.
-            float playerAng = rad * 180 / Mathf.PI; // convert to angles
-            
-           
+            float playerAng = rad * 180 / Mathf.PI; // convert to angles          
             float maxAng = offsetAngle + widthAngle;//Far angle           
+
+            if(playerAng<0)
+            {
+                playerAng += 360;
+            }
+           // Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + offsetAngle + " , " +(offsetAngle + widthAngle) +" ,offset is :"+ offset.sqrMagnitude);
+            
+
 
 
             if(maxAng > 360)//if we are looping around 0
@@ -71,7 +78,7 @@ public class SightLine : MonoBehaviour {
 
         }
         
-        return false;
+        
     }
 
 }

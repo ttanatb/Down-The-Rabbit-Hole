@@ -8,23 +8,31 @@ public class CameraScript : MonoBehaviour {
     public float deadY;
     //player game object for the camera to follow
     public GameObject player;
+    //position storage vectors
     Vector3 playerPosition;
     Vector3 cameraPosition;
+
+    //damping velocity
+    //Vector3 velocity = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
         playerPosition = player.transform.position;
-        cameraPosition = gameObject.transform.position;
+        //setting the camera to the player's position to start
+        cameraPosition = playerPosition;
+        cameraPosition.z -= 1.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //getting the player's position each frame to check
+        playerPosition = player.transform.position;
         //if The player is outside the deadzone move the deadzone to take over the player
         if (playerPosition.x > cameraPosition.x + deadX)
         {
             cameraPosition.x = playerPosition.x - deadX;
         }
-        else if (playerPosition.x > cameraPosition.x - deadX)
+        else if (playerPosition.x < cameraPosition.x - deadX)
         {
             cameraPosition.x = playerPosition.x + deadX;
         }
@@ -34,12 +42,13 @@ public class CameraScript : MonoBehaviour {
         {
             cameraPosition.y = playerPosition.y - deadY;
         }
-        else if (playerPosition.y > cameraPosition.y - deadY)
+        else if (playerPosition.y < cameraPosition.y - deadY)
         {
             cameraPosition.y = playerPosition.y + deadY;
         }
 
-        //
-        
+        //changing the position of the camera
+        //gameObject.transform.position= Vector3.SmoothDamp(gameObject.transform.position,cameraPosition, ref velocity, 0.25f);
+        gameObject.transform.position = cameraPosition;
     }
 }
