@@ -54,7 +54,7 @@ public class SightLine : MonoBehaviour {
             {
                 playerAng += 360;
             }
-            Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + minAng + " to " +(maxAng) +" ,offset is :"+ offset.sqrMagnitude);
+            //Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + minAng + " to " +(maxAng) +" ,offset is :"+ offset.sqrMagnitude);
 
 
 
