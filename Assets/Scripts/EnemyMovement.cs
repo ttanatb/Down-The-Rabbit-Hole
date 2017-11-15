@@ -17,7 +17,10 @@ public class EnemyMovement : MonoBehaviour
     #endregion
 
     #region Variables
-    // Set this 
+    // Instance of the player
+    GameObject player;
+
+    // Determines the type of enemy
     [SerializeField]
     EnemyType enemyType;
 
@@ -33,15 +36,25 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     float timeBetweenPoints;
 
+    // Beast Hearing Variables
+    [SerializeField]
+    float hearDistance;
+    [SerializeField]
+    float investigationTime;
+
+
     private bool justMoved;
     private int currentPathPoint;
     public List<GameObject> pathPoints;
     #endregion
 
-
+    #region Start
     void Start()
     {
-        // Set current path point to it's first
+        // Get the instance of the player
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // For Path Following Set current path point to it's first
         currentPathPoint = 0;
         justMoved = false;
 
@@ -51,7 +64,15 @@ public class EnemyMovement : MonoBehaviour
             transform.rotation = pathPoints[0].transform.rotation;
             transform.position = pathPoints[0].transform.position;
         }
+
+        if(enemyType == EnemyType.Beast)
+        {
+            GameObject HearingRadius = transform.GetChild(0).gameObject;
+            HearingRadius.transform.localScale = new Vector3(hearDistance * 1.5f, hearDistance * 1.5f, 0);
+        }
+
     }
+    #endregion
 
     #region Update
     // Update is called once per frame
@@ -88,10 +109,23 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case EnemyType.Beast:
+                if((player.transform.position - transform.position).magnitude < hearDistance)
+                {
+                    InvestigateSound();
+                }
+                //else if()
+                
+                
                 // Path follow if given a path
-                PathFollow();
+
+
+                //PathFollow();
+
+
 
                 // Stationary otherwise
+
+
                 break;
 
             case EnemyType.Haunter:
@@ -190,5 +224,31 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log("We Just Shot!");
         justMoved = false;
     }
+
+    void InvestigateSound()
+    {
+        // Rotate the view of the enemy towards the new point
+        transform.rotation = TurnTowardsPoint(player.transform.position);
+
+        // Step 1: Find Desired Velocity
+        // This is the vector pointing from myself to my target
+        Vector2 desiredVelocity = player.transform.position - transform.position;
+
+        // Step 2: Scale Desired to maximum speed
+        //         so I move as fast as possible
+        desiredVelocity.Normalize();
+        desiredVelocity *= movementSpeed;
+
+        // Step 3: Calculate your Steering Force
+        Vector2 steeringForce = desiredVelocity - GetComponent<Rigidbody2D>().velocity;
+
+        // Clamp the ultimate force by the maximum force
+        //Vector3.ClampMagnitude(steeringForce, maxForce);
+
+        // Apply the force
+        GetComponent<Rigidbody2D>().AddForce(steeringForce);
+    }
     #endregion
+
+
 }
