@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour {
 
-    enum SceneState
+    public enum SceneState
     {
         Play, Win, Pause, Lose
     }
@@ -13,23 +14,62 @@ public class SceneChange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        state = SceneState.Play;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        state = CheckState();
 	}
 
-    void ChangeState(SceneState state)
+    // Update is called once per frame
+    void Update()
     {
-        if(state == this.state)
-        {
-            return;
-        }else if(state == SceneState.Win){
-            Application.LoadLevel("");
-        }
+       // Debug.Log(state);
+        //checking if the player wants to play again here
+        if ((state == SceneState.Win|| state == SceneState.Lose) && Input.GetKeyUp(KeyCode.Space))
+                ChangeState(SceneState.Play);
+       
+        
+    }
+    
+	
+    /// <summary>
+    /// Changes the state
+    /// </summary>
+    /// <param name="state">The scene state to pass in</param>
+     public void ChangeState(SceneState state)
+    {
+        //checking to see if we're already
+        //in the scene we're changing to 
+        if (state == this.state)
+            return;   //do nothing
+        else if (state == SceneState.Win)
+            SceneManager.LoadScene("Win_Screne");
+        else if (state == SceneState.Lose)
+            SceneManager.LoadScene("Lose_Screne");
+        else if (state == SceneState.Play)
+            SceneManager.LoadScene("W2Sprint");
 
+        
+
+    }
+    /// <summary>
+    /// Helper method for intialization
+    /// </summary>
+    /// <returns></returns>
+    SceneState CheckState()
+    {
+        if (SceneManager.GetActiveScene().name == "Win_Screne")
+            return SceneState.Win;
+        else if (SceneManager.GetActiveScene().name == "Lose_Screne")
+            return SceneState.Lose;
+        else
+            return SceneState.Play;
+
+    }
+    /// <summary>
+    /// Returns current state
+    /// </summary>
+   public SceneState State
+    {
+        get { return state; }
+     
     }
 
 
