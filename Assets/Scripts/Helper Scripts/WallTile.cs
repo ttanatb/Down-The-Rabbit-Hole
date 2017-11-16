@@ -24,11 +24,7 @@ public class WallTile : MonoBehaviour
         }
 
         walls.Add(this);
-    }
 
-    private void Start()
-    {
-        thisSpriteRenderer = GetComponent<SpriteRenderer>();
         for (int i = 0; i < adjacentTiles.Length; i++)
         {
             adjacentTiles[i] = null;
@@ -43,6 +39,7 @@ public class WallTile : MonoBehaviour
                 if ((walls[i].transform.position - upPos).sqrMagnitude < 0.3f)
                 {
                     adjacentTiles[0] = walls[i];
+                    walls[i].adjacentTiles[2] = this;
                     continue;
                 }
             }
@@ -52,13 +49,10 @@ public class WallTile : MonoBehaviour
             {
                 Vector3 rightPos = transform.position + Vector3.right * 2;
 
-                //Debug.Log("Right spot: " + rightPos);
-                //Debug.Log("Testing agains: " + walls[i].transform.position);
                 if ((walls[i].transform.position - rightPos).sqrMagnitude < 0.3f)
                 {
-                    //print("There's something to the right of " + gameObject.name);
-
                     adjacentTiles[1] = walls[i];
+                    walls[i].adjacentTiles[3] = this;
                     continue;
                 }
             }
@@ -70,6 +64,7 @@ public class WallTile : MonoBehaviour
                 if ((walls[i].transform.position - downPos).sqrMagnitude < 0.3f)
                 {
                     adjacentTiles[2] = walls[i];
+                    walls[i].adjacentTiles[0] = this;
                     continue;
                 }
             }
@@ -81,13 +76,22 @@ public class WallTile : MonoBehaviour
                 if ((walls[i].transform.position - leftPos).sqrMagnitude < 0.3f)
                 {
                     adjacentTiles[3] = walls[i];
+                    walls[i].adjacentTiles[1] = this;
                     continue;
                 }
             }
         }
+    }
 
+    private void Start()
+    {
+        thisSpriteRenderer = GetComponent<SpriteRenderer>();
         for (int i = 0; i < adjacentTiles.Length; i++)
         {
+            int next = i + 1;
+            if (i + 1 >= adjacentTiles.Length)
+                next = 0;
+
             if (!adjacentTiles[i])
             {
                 GameObject side = new GameObject();
@@ -119,9 +123,7 @@ public class WallTile : MonoBehaviour
                 r.sortingOrder = thisSpriteRenderer.sortingOrder + 1;
                 r.color = thisSpriteRenderer.color;
 
-                int next = i + 1;
-                if (i + 1 >= adjacentTiles.Length)
-                    next = 0;
+
 
                 if (!adjacentTiles[next])
                 {
@@ -155,13 +157,40 @@ public class WallTile : MonoBehaviour
                     rend.color = thisSpriteRenderer.color;
                 }
             }
-        }
 
-        if (adjacentTiles[0] && adjacentTiles[1] &&
-            !adjacentTiles[0].adjacentTiles[1] &&
-            !adjacentTiles[1].adjacentTiles[0])
-        {
+            else if (adjacentTiles[next] &&
+                !adjacentTiles[i].adjacentTiles[next] &&
+                !adjacentTiles[next].adjacentTiles[i])
+            {
+                GameObject corner = new GameObject();
+                corner.transform.SetParent(transform);
+                corner.name = "Wall-In-Corner";
+                switch (i)
+                {
+                    case 0:
+                        corner.transform.localPosition = new Vector3(0.78f, 0.78f, 0);
+                        corner.transform.localRotation = Quaternion.Euler(0, 0, 90f);
+                        break;
+                    case 1:
+                        corner.transform.localPosition = new Vector3(0.78f, -0.78f, 0);
+                        corner.transform.localRotation = Quaternion.Euler(0, 0, 0f);
+                        break;
+                    case 2:
+                        corner.transform.localPosition = new Vector3(-0.78f, -0.78f, 0);
+                        corner.transform.localRotation = Quaternion.Euler(0, 0, 270f);
+                        break;
+                    default:
+                        corner.transform.localPosition = new Vector3(-0.78f, 0.78f, 0);
+                        corner.transform.localRotation = Quaternion.Euler(0, 0, -180f);
+                        break;
+                }
 
+                SpriteRenderer rend = corner.AddComponent<SpriteRenderer>();
+                rend.sprite = wallInCorner;
+                rend.sortingLayerID = thisSpriteRenderer.sortingLayerID;
+                rend.sortingOrder = thisSpriteRenderer.sortingOrder + 2;
+                rend.color = thisSpriteRenderer.color;
+            }
         }
     }
 
