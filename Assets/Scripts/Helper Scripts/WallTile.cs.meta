@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d78626946dc32df499e728b26f788208
-timeCreated: 1510857428
+timeCreated: 1510862490
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -8,6 +8,8 @@ MonoImporter:
   - wallSide: {fileID: 21300000, guid: 46950ebf9bb4a8a49aadd8ea9d6d0c89, type: 3}
   - wallOutCorner: {fileID: 21300000, guid: a05e500d0907f544a9a484f4fed7a91a, type: 3}
   - wallInCorner: {fileID: 21300000, guid: 8447a7bb3c381384b82540301d7e395d, type: 3}
+  - floorPrefab: {fileID: 1532718291489388, guid: a90c7ee5423b17b4e9dec6ed5e1cc951,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

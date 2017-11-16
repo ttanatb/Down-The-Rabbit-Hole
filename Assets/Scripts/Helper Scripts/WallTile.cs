@@ -8,8 +8,12 @@ public class WallTile : MonoBehaviour
     public Sprite wallOutCorner;
     public Sprite wallInCorner;
 
+    public GameObject floorPrefab;
+
     [SerializeField]
     private static List<WallTile> walls;
+
+    private static bool createdFloor;
 
     private WallTile[] adjacentTiles = new WallTile[4];
 
@@ -123,8 +127,6 @@ public class WallTile : MonoBehaviour
                 r.sortingOrder = thisSpriteRenderer.sortingOrder + 1;
                 r.color = thisSpriteRenderer.color;
 
-
-
                 if (!adjacentTiles[next])
                 {
                     GameObject corner = new GameObject();
@@ -191,6 +193,60 @@ public class WallTile : MonoBehaviour
                 rend.sortingOrder = thisSpriteRenderer.sortingOrder + 2;
                 rend.color = thisSpriteRenderer.color;
             }
+        }
+
+        if (!createdFloor)
+        {
+            createdFloor = true;
+
+            Dictionary<int, Vector3> wallMinMax = new Dictionary<int, Vector3>();
+
+            for (int i = 0; i < walls.Count; i++)
+            {
+                int yKey = (int)walls[i].transform.position.y;
+
+                if (!wallMinMax.ContainsKey(yKey))
+                {
+                    //allWalls.Add(yKey, new List<WallTile>());
+                    wallMinMax.Add(yKey, new Vector3(walls[i].transform.position.x, walls[i].transform.position.x, walls[i].transform.position.y));
+                }
+
+                //allWalls[yKey].Add(walls[i]);
+
+                if (walls[i].transform.position.x < wallMinMax[yKey].x)
+                {
+                    Vector3 minX = wallMinMax[yKey];
+                    minX.x = walls[i].transform.position.x;
+                    wallMinMax[yKey] = minX;
+                }
+
+                if (walls[i].transform.position.x > wallMinMax[yKey].y)
+                {
+                    Vector3 minX = wallMinMax[yKey];
+                    minX.y = walls[i].transform.position.x;
+                    wallMinMax[yKey] = minX;
+                }
+            }
+
+            GameObject floors = new GameObject();
+            floors.name = "Floors";
+            foreach(int i in wallMinMax.Keys)
+            {
+                for (float x = wallMinMax[i].x; x < wallMinMax[i].y + 1f; x += 2f)
+                {
+                    Instantiate(floorPrefab, new Vector3(x, wallMinMax[i].z, 0), Quaternion.identity, floors.transform);
+                }
+            }
+
+            //for (float x = min.x; x < max.x + 1f; x += 2)
+            //{
+            //    for (float y = min.y; y < max.y + 1f; y += 2)
+            //    {
+            //        Instantiate(floorPrefab, new Vector3(x, y, 0), Quaternion.identity, floors.transform);
+            //    }
+            //}
+
+
         }
     }
 
