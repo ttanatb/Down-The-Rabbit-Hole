@@ -9,6 +9,7 @@ public class StaticObject : MonoBehaviour
     void Start()
     {
         sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
+        Debug.Log(sceneChange.State);
     }
 
     // Update is called once per frame
@@ -17,9 +18,11 @@ public class StaticObject : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(other.gameObject.tag == "Player"&& gameObject.tag =="Goal")
+        
+        Debug.Log("collision");
+        if (collision.gameObject.tag == "Player"&& gameObject.tag =="Goal")
             sceneChange.ChangeState(SceneChange.SceneState.Win);
         
     }
