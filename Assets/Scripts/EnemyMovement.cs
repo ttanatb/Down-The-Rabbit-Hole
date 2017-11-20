@@ -27,6 +27,8 @@ public class EnemyMovement : MonoBehaviour
     // Rotation Variables
     [SerializeField]
     float rotationSpeed;
+    [SerializeField]
+    bool rotateClockwise;
 
     // Movement Variables
     [SerializeField]
@@ -41,6 +43,9 @@ public class EnemyMovement : MonoBehaviour
     float hearDistance;
     [SerializeField]
     float investigationTime;
+    bool investigating;
+    Vector3 startingPoint;
+    Vector3 investigationPoint;
 
 
     private bool justMoved;
@@ -53,6 +58,9 @@ public class EnemyMovement : MonoBehaviour
     {
         // Get the instance of the player
         player = GameObject.FindGameObjectWithTag("Player");
+        
+        // Set the initial position of the enemy (for investigation enemies)
+        startingPoint = transform.position;
 
         // For Path Following Set current path point to it's first
         currentPathPoint = 0;
@@ -65,6 +73,7 @@ public class EnemyMovement : MonoBehaviour
             transform.position = pathPoints[0].transform.position;
         }
 
+        // If you are a beast (investigation unit) set the visual radius for the hearing distance
         if(enemyType == EnemyType.Beast)
         {
             GameObject HearingRadius = transform.GetChild(0).gameObject;
@@ -109,11 +118,21 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case EnemyType.Beast:
+                // Check if the player is in the hearing radius and set investigating to true if so
                 if((player.transform.position - transform.position).magnitude < hearDistance)
+                {
+                    investigating = true;
+                }
+
+                // Have the enemy investigate the sound heard
+                if(investigating)
                 {
                     InvestigateSound();
                 }
-                //else if()
+                else if ((startingPoint - transform.position).magnitude < .01f)
+                {
+                    MoveTowards(startingPoint);
+                }
                 
                 
                 // Path follow if given a path
@@ -154,7 +173,11 @@ public class EnemyMovement : MonoBehaviour
     void RotateInPlace()
     {
         float zRotationVar = transform.eulerAngles.z;
-        zRotationVar += rotationSpeed;
+
+        // Rotate Clockwise or CounterClockwise
+        if (rotateClockwise) { zRotationVar += rotationSpeed; }
+        else { zRotationVar -= rotationSpeed; }
+
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
     }
 
@@ -183,56 +206,64 @@ public class EnemyMovement : MonoBehaviour
     void PathFollow()
     {
         // If the enemy unit gets close enough to the path point it advances the current path point
-        if ((transform.position - pathPoints[currentPathPoint].transform.position).magnitude < .5f)
+        if ((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .01f)
         {
             // Get the next hole number and set it as the new currentPathPoint
             int nextHoleNum = currentPathPoint + 1;
             nextHoleNum %= pathPoints.Count;
             currentPathPoint = nextHoleNum;
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
-        // Rotate the view of the enemy towards the new point
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, TurnTowardsPoint(pathPoints[currentPathPoint].transform.position), Time.deltaTime * rotationSpeed);
-
-        // Step 1: Find Desired Velocity
-        // This is the vector pointing from myself to my target
-        Vector2 desiredVelocity = pathPoints[currentPathPoint].transform.position - transform.position;
-
-        // Step 2: Scale Desired to maximum speed
-        //         so I move as fast as possible
-        desiredVelocity.Normalize();
-        desiredVelocity *= movementSpeed;
-
-        // Step 3: Calculate your Steering Force
-        Vector2 steeringForce = desiredVelocity - GetComponent<Rigidbody2D>().velocity;
-
-        // Clamp the ultimate force by the maximum force
-        //Vector3.ClampMagnitude(steeringForce, maxForce);
-
-        // Apply the force
-        GetComponent<Rigidbody2D>().AddForce(steeringForce);
-
-        
+        MoveTowards(pathPoints[currentPathPoint].transform.position);
     }
 
     /// <summary>
-    /// Keeps the player from spamming the shoot button
+    /// Resets the just moved variable
+    /// This is called with a Courotine to have a time delay between movement actions.
     /// </summary>
     void ResetMovementVariable()
     {
-        // Player Can't shoot for .5 seconds
-        //Debug.Log("We Just Shot!");
+        // Set the justMoved Variable to false
         justMoved = false;
     }
 
+
+    /// <summary>
+    /// Investigation unit
+    /// Used for: Beast
+    /// </summary>
     void InvestigateSound()
     {
+        // Save the spot to investigate
+        investigationPoint = player.transform.position;
+
+        MoveTowards(investigationPoint);
+
+        // After it reaches the investigating point turn off investigation
+        if((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .01f)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+            investigating = false;
+        }
+    }
+
+    /// <summary>
+    /// Turns and moves a unit towards an individual point
+    /// Used for: Slug, Beast, Haunter
+    /// </summary>
+    void MoveTowards(Vector3 point)
+    {
         // Rotate the view of the enemy towards the new point
-        transform.rotation = TurnTowardsPoint(player.transform.position);
+        //transform.rotation = TurnTowardsPoint(point);
+
+
+        // Rotate the view of the enemy towards the new point
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, TurnTowardsPoint(point), Time.deltaTime * rotationSpeed);
 
         // Step 1: Find Desired Velocity
         // This is the vector pointing from myself to my target
-        Vector2 desiredVelocity = player.transform.position - transform.position;
+        Vector2 desiredVelocity = point - transform.position;
 
         // Step 2: Scale Desired to maximum speed
         //         so I move as fast as possible
@@ -248,7 +279,7 @@ public class EnemyMovement : MonoBehaviour
         // Apply the force
         GetComponent<Rigidbody2D>().AddForce(steeringForce);
     }
-    #endregion
+        #endregion
 
 
-}
+    }
