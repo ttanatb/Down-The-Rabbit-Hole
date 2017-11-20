@@ -42,9 +42,14 @@ public class SightLine : MonoBehaviour {
 
         leftPos.x = position.x + Radius * (Mathf.Cos(maxAngRad));
         leftPos.y = position.y + Radius * ( Mathf.Sin(maxAngRad));
+        leftPos.z = -.1f;
 
         rightPos.x = position.x + Radius * (Mathf.Cos(minAngRad));
         rightPos.y = position.y + Radius * ( Mathf.Sin(minAngRad));
+        rightPos.z=-.1f;
+        position.z = -.1f;
+        
+
         myRenderer.SetPosition(0, position);
         myRenderer.SetPosition(1, leftPos);
         myRenderer.SetPosition(2, rightPos);
@@ -80,13 +85,16 @@ public class SightLine : MonoBehaviour {
             }
             Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + minAng + " to " + maxAng +" ,offset is :"+ offset.sqrMagnitude);
 
-
+            if(minAng > 360)
+            {
+                minAng -= 360;
+            }
 
             if (maxAng > 360)//if we are looping around 0
             {
                 maxAng -= 360;//set the Maximum angle to a small number(below 360).
                 //Player is greater than the minimum, or less than the maximum;
-                if (playerAng > minAng || playerAng < maxAng)
+                if (playerAng > minAng && playerAng < maxAng)
                 {//This is OR not AND because of the looping around 0;
                     return true;
                 }
