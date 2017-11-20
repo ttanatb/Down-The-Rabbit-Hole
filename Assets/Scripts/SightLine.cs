@@ -42,9 +42,14 @@ public class SightLine : MonoBehaviour {
 
         leftPos.x = position.x + Radius * (Mathf.Cos(maxAngRad));
         leftPos.y = position.y + Radius * ( Mathf.Sin(maxAngRad));
+        leftPos.z = -.1f;
 
         rightPos.x = position.x + Radius * (Mathf.Cos(minAngRad));
         rightPos.y = position.y + Radius * ( Mathf.Sin(minAngRad));
+        rightPos.z=-.1f;
+        position.z = -.1f;
+        
+
         myRenderer.SetPosition(0, position);
         myRenderer.SetPosition(1, leftPos);
         myRenderer.SetPosition(2, rightPos);
