@@ -9,9 +9,16 @@ public class MenuManager : MonoBehaviour
     public MenuState currentMenu;
     private MenuState lastMenu; //Holds last menu so it can update when the value is changed in the inspector
     public GameObject[] menus; //a collection of gameobjects holding each menu, indexed according to the enum
+    private SceneChange sceneChange;
                                // Use this for initialization
     void Start()
     {
+        
+        sceneChange = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneChange>();
+        
+        if(sceneChange.State == SceneChange.SceneState.Play)
+            currentMenu = MenuState.None;
+
         ChangeMenu(currentMenu); //Ensure there will always only be one menu open 
     }
 
