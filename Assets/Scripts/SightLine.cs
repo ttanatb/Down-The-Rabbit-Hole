@@ -20,6 +20,10 @@ public class SightLine : MonoBehaviour {
    
     // Use this for initialization
     void Start () {
+		if (!Player)
+        {
+            Player = FindObjectOfType<PlayerController>().gameObject;
+        }
         sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
         myRenderer = gameObject.GetComponent<LineRenderer>();
  
