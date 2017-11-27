@@ -15,7 +15,10 @@ public class SightLine : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+		if (!Player)
+        {
+            Player = FindObjectOfType<PlayerController>().gameObject;
+        }
 	}
 	
 	// Update is called once per frame
