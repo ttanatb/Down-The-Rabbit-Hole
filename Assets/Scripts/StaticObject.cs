@@ -8,7 +8,7 @@ public class StaticObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
+        sceneChange = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneChange>();
         Debug.Log(sceneChange.State);
     }
 
@@ -18,12 +18,15 @@ public class StaticObject : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        Debug.Log("collision");
-        if (collision.gameObject.tag == "Player"&& gameObject.tag =="Goal")
+        
+        if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Goal")
+        {
+            Debug.Log("collision");
             sceneChange.ChangeState(SceneChange.SceneState.Win);
+        }
         
     }
 }

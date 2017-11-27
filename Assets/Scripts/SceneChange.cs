@@ -7,14 +7,17 @@ public class SceneChange : MonoBehaviour {
 
     public enum SceneState
     {
-        Play, Win, Pause, Lose
+         Play, Win, Lose, MainMenu
     }
 
     SceneState state;
+    MenuManager menuManager;
 
 	// Use this for initialization
 	void Start () {
         state = CheckState();
+        menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
+
 	}
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class SceneChange : MonoBehaviour {
         if ((state == SceneState.Win|| state == SceneState.Lose) && Input.GetKeyUp(KeyCode.Space))
                 ChangeState(SceneState.Play);
        
+        
         
     }
     
@@ -40,11 +44,20 @@ public class SceneChange : MonoBehaviour {
         if (state == this.state)
             return;   //do nothing
         else if (state == SceneState.Win)
+        {
             SceneManager.LoadScene("Win_Screne");
+            state = SceneState.Win;
+        }
         else if (state == SceneState.Lose)
+        {
             SceneManager.LoadScene("Lose_Screne");
+            state = SceneState.Lose;
+        }
         else if (state == SceneState.Play)
+        {
             SceneManager.LoadScene("W2Sprint");
+            state = SceneState.Play;
+        }
 
         
 

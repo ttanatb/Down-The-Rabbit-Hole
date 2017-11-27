@@ -7,18 +7,26 @@ public class SightLine : MonoBehaviour {
     Vector3 position;
     Vector3 playerPosition;
     Vector3 offset;
+    Vector3 leftPos, rightPos;
+    float minAng, maxAng;
+    LineRenderer myRenderer;
+
+    SceneChange sceneChange;
     public GameObject Player;
     public float offsetAngle;
     public float widthAngle;
     public float Radius;
-
-
+    public Material mat;
+   
     // Use this for initialization
     void Start () {
 		if (!Player)
         {
             Player = FindObjectOfType<PlayerController>().gameObject;
         }
+        sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
+        myRenderer = gameObject.GetComponent<LineRenderer>();
+ 
 	}
 	
 	// Update is called once per frame
@@ -26,15 +34,39 @@ public class SightLine : MonoBehaviour {
         position = gameObject.transform.position;
         playerPosition = Player.transform.position;
         offset = playerPosition - position;
-        offsetAngle = gameObject.transform.rotation.z;
-        offsetAngle = offsetAngle * 180 / Mathf.PI;
+        offsetAngle = gameObject.transform.rotation.eulerAngles.z;
+     
+
+        maxAng = 90 + offsetAngle + (widthAngle / 2);//Far angle           
+        minAng = 90 + (offsetAngle - (widthAngle / 2));
+
+        float maxAngRad = maxAng * Mathf.Deg2Rad;
+        float minAngRad = minAng * Mathf.Deg2Rad;
+
+
+        leftPos.x = position.x + Radius * (Mathf.Cos(maxAngRad));
+        leftPos.y = position.y + Radius * ( Mathf.Sin(maxAngRad));
+        leftPos.z = -.1f;
+
+        rightPos.x = position.x + Radius * (Mathf.Cos(minAngRad));
+        rightPos.y = position.y + Radius * ( Mathf.Sin(minAngRad));
+        rightPos.z=-.1f;
+        position.z = -.1f;
+        
+
+        myRenderer.SetPosition(0, position);
+        myRenderer.SetPosition(1, leftPos);
+        myRenderer.SetPosition(2, rightPos);
+
+        
         if (offset.sqrMagnitude < Radius*Radius)//Circle Collision Check;
         {
             if (SightLineCheck())
-            {
+            {                
                 Debug.Log("HIT");
+                sceneChange.ChangeState(SceneChange.SceneState.Lose);
             }
-                
+             
         }
 
 	}
@@ -49,23 +81,24 @@ public class SightLine : MonoBehaviour {
         {
             float rad = Mathf.Atan2(offset.y, offset.x);//Get the angle that the player is from the sightline's source.
             float playerAng = rad * 180 / Mathf.PI; // convert to angles          
-            float maxAng = 90 + offsetAngle + (widthAngle/2);//Far angle           
-            float minAng = 90 - offsetAngle - (widthAngle/2);
 
 
-            if(playerAng<0)
+            if (playerAng<0)
             {
                 playerAng += 360;
             }
-            Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + minAng + " to " +(maxAng) +" ,offset is :"+ offset.sqrMagnitude);
+            Debug.Log( "Player angle is:" + playerAng + " Range of hit angles is:" + minAng + " to " + maxAng +" ,offset is :"+ offset.sqrMagnitude);
 
-
+            if(minAng > 360)
+            {
+                minAng -= 360;
+            }
 
             if (maxAng > 360)//if we are looping around 0
             {
                 maxAng -= 360;//set the Maximum angle to a small number(below 360).
                 //Player is greater than the minimum, or less than the maximum;
-                if (playerAng < minAng || playerAng > maxAng)
+                if (playerAng > minAng && playerAng < maxAng)
                 {//This is OR not AND because of the looping around 0;
                     return true;
                 }
@@ -96,5 +129,6 @@ public class SightLine : MonoBehaviour {
         
         
     }
+  
 
 }
