@@ -96,5 +96,8 @@ public class MenuManager : MonoBehaviour
     public void MenuGame()
     {
         ChangeMenu(MenuState.None);
+        //If on main menu or win/lose screens will change to play,
+        //if in the game does nothing.
+        sceneChange.ChangeState(SceneChange.SceneState.Play);
     }
 }

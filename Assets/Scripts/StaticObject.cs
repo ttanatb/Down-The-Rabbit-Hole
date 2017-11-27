@@ -18,13 +18,13 @@ public class StaticObject : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        
-        
+
+        Debug.Log("collision");
         if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Goal")
         {
-            Debug.Log("collision");
+            
             sceneChange.ChangeState(SceneChange.SceneState.Win);
         }
         

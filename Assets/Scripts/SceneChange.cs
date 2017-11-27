@@ -12,12 +12,18 @@ public class SceneChange : MonoBehaviour {
 
     SceneState state;
     MenuManager menuManager;
-
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         state = CheckState();
-        menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
-
+    }
+    // Use this for initialization
+    void Start () {
+        
+        
+        if (state == SceneState.Play||state == SceneState.MainMenu)
+        {
+            menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
+        }
 	}
 
     // Update is called once per frame
