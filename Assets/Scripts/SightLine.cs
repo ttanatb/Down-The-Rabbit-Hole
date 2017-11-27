@@ -9,6 +9,7 @@ public class SightLine : MonoBehaviour {
     Vector3 offset;
     Vector3 leftPos, rightPos;
     float minAng, maxAng;
+
     LineRenderer myRenderer;
 
     SceneChange sceneChange;
@@ -24,9 +25,8 @@ public class SightLine : MonoBehaviour {
         {
             Player = FindObjectOfType<PlayerController>().gameObject;
         }
+        myRenderer = GetComponent<LineRenderer>();
         sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
-        myRenderer = gameObject.GetComponent<LineRenderer>();
- 
 	}
 	
 	// Update is called once per frame
@@ -52,7 +52,6 @@ public class SightLine : MonoBehaviour {
         rightPos.y = position.y + Radius * ( Mathf.Sin(minAngRad));
         rightPos.z=-.1f;
         position.z = -.1f;
-        
 
         myRenderer.SetPosition(0, position);
         myRenderer.SetPosition(1, leftPos);
