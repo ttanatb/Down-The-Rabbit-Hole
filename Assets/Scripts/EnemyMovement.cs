@@ -30,6 +30,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     bool rotateClockwise;
 
+    // Variables to hold original position and rotation
+    Vector3 startingPosition;
+    Quaternion startingRotation;
+
     // Movement Variables
     [SerializeField]
     float movementSpeed;
@@ -44,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     float investigationTime;
     bool investigating;
-    Vector3 startingPoint;
+    bool returnedHome;
     Vector3 investigationPoint;
 
 
@@ -60,7 +64,9 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         
         // Set the initial position of the enemy (for investigation enemies)
-        startingPoint = transform.position;
+        startingPosition = transform.position;
+        startingRotation = transform.localRotation;
+        returnedHome = true;
 
         // For Path Following Set current path point to it's first
         currentPathPoint = 0;
@@ -121,30 +127,43 @@ public class EnemyMovement : MonoBehaviour
                 // Check if the player is in the hearing radius and set investigating to true if so
                 if((player.transform.position - transform.position).magnitude < hearDistance)
                 {
+                    // Save the spot to investigate
+                    investigationPoint = player.transform.position;
+
+                    // Set investigation bool to true and returnedHome (at initial position) to false
                     investigating = true;
+                    returnedHome = false;
                 }
 
                 // Have the enemy investigate the sound heard
                 if(investigating)
                 {
                     InvestigateSound();
+                    //Debug.Log("Investigating");
                 }
-                else if ((startingPoint - transform.position).magnitude < .01f)
+                // If not at starting point and not investigating then return home
+                else if (!returnedHome)
                 {
-                    MoveTowards(startingPoint);
+                    MoveTowards(startingPosition);
+
+                    // If the player arrives back at it's staring position
+                    if ((startingPosition - transform.position).magnitude < .01f)
+                    {
+                        returnedHome = true;
+                        GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+                    }
                 }
-                
+                // If at initial spot rotate looking direction to original look direction
+                else
+                {
+                    // Rotate the view of the enemy towards the new point
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, startingRotation, Time.deltaTime * rotationSpeed);
+                    //Debug.Log("Rotating to initail rotation");
+                }
                 
                 // Path follow if given a path
-
-
                 //PathFollow();
-
-
-
                 // Stationary otherwise
-
-
                 break;
 
             case EnemyType.Haunter:
@@ -235,13 +254,10 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void InvestigateSound()
     {
-        // Save the spot to investigate
-        investigationPoint = player.transform.position;
-
         MoveTowards(investigationPoint);
 
         // After it reaches the investigating point turn off investigation
-        if((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .01f)
+        if((transform.position - investigationPoint).magnitude < .01f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
             investigating = false;
