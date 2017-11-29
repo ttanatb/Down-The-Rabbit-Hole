@@ -27,6 +27,15 @@ public class StaticObject : MonoBehaviour
             
             sceneChange.ChangeState(SceneChange.SceneState.Win);
         }
-        
+
+        else if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Collectable")
+        {
+
+            Collider2D myCollider = gameObject.GetComponentInParent<Collider2D>();
+            myCollider.enabled = false;
+            SpriteRenderer myRenderer = gameObject.GetComponentInParent<SpriteRenderer>();
+            myRenderer.enabled = false;
+        }
+
     }
 }

@@ -7,7 +7,7 @@ public class SightLine : MonoBehaviour {
     Vector3 position;
     Vector3 playerPosition;
     Vector3 offset;
-    Vector3 leftPos, rightPos;
+    Vector3 leftPos, rightPos, centerPos;
     float minAng, maxAng;
 
     LineRenderer myRenderer;
@@ -33,6 +33,8 @@ public class SightLine : MonoBehaviour {
 	void Update () {
         position = gameObject.transform.position;
         playerPosition = Player.transform.position;
+       // Vector3 playerToMonster = playerPosition - position;
+       // playerPosition = playerPosition - (playerToMonster.normalized * .35f);
         offset = playerPosition - position;
         offsetAngle = gameObject.transform.rotation.eulerAngles.z;
      
@@ -48,6 +50,10 @@ public class SightLine : MonoBehaviour {
         leftPos.y = position.y + Radius * ( Mathf.Sin(maxAngRad));
         leftPos.z = -.1f;
 
+        centerPos.x = position.x + Radius * (Mathf.Cos((90 + offsetAngle) * Mathf.Deg2Rad));
+        centerPos.y = position.y + Radius * (Mathf.Sin((90+ offsetAngle) * Mathf.Deg2Rad));
+        centerPos.z = 0.0f;
+
         rightPos.x = position.x + Radius * (Mathf.Cos(minAngRad));
         rightPos.y = position.y + Radius * ( Mathf.Sin(minAngRad));
         rightPos.z=-.1f;
@@ -55,7 +61,8 @@ public class SightLine : MonoBehaviour {
 
         myRenderer.SetPosition(0, position);
         myRenderer.SetPosition(1, leftPos);
-        myRenderer.SetPosition(2, rightPos);
+        myRenderer.SetPosition(2, centerPos);
+        myRenderer.SetPosition(3, rightPos);
 
         
         if (offset.sqrMagnitude < Radius*Radius)//Circle Collision Check;
