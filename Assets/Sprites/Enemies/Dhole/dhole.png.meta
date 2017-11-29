@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: 15a21e63e30c95548924bcf3c2edcbf7
-timeCreated: 1511797067
+guid: 0c6dfc8d3106c5b48bdcda65faf950c4
+timeCreated: 1511937679
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: dhole_back_mouth1
+    21300002: dhole_back_mouth_2
+    21300004: dhole_body
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +37,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,9 +79,48 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: dhole_back_mouth1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 259
+        width: 26
+        height: 34
+      alignment: 9
+      pivot: {x: 0.52300966, y: 0.29049054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: dhole_back_mouth_2
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 258
+        width: 23
+        height: 35
+      alignment: 9
+      pivot: {x: 0.46748635, y: 0.27791747}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: dhole_body
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 51
+        height: 267
+      alignment: 9
+      pivot: {x: 0.5179814, y: 0.006037107}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
-  userData: 
+  userData: 99086347303578
   assetBundleName: 
   assetBundleVariant: 
