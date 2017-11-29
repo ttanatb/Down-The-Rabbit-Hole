@@ -146,15 +146,15 @@ public class EnemyMovement : MonoBehaviour
                 {
                     MoveTowards(startingPosition);
 
-                    // If the player arrives back at it's staring position
-                    if ((startingPosition - transform.position).magnitude < .01f)
+                    // If the beast arrives back at it's staring position
+                    if ((startingPosition - transform.position).magnitude < .1f)
                     {
                         returnedHome = true;
                         GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
                     }
                 }
                 // If at initial spot rotate looking direction to original look direction
-                else
+                else if(returnedHome && !investigating)
                 {
                     // Rotate the view of the enemy towards the new point
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, startingRotation, Time.deltaTime * rotationSpeed);
@@ -257,7 +257,7 @@ public class EnemyMovement : MonoBehaviour
         MoveTowards(investigationPoint);
 
         // After it reaches the investigating point turn off investigation
-        if((transform.position - investigationPoint).magnitude < .01f)
+        if((transform.position - investigationPoint).magnitude < .1f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
             investigating = false;
