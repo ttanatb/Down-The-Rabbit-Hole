@@ -29,11 +29,7 @@ public class SceneChange : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log(state);
-        //checking if the player wants to play again here
-        if ((state == SceneState.Win|| state == SceneState.Lose) && Input.GetKeyUp(KeyCode.Space))
-                ChangeState(SceneState.Play);
-       
+        //currently empty  
         
         
     }

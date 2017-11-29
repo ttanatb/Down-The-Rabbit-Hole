@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     public Transform bodyBone;      //the bone for the body
     public Transform[] earsIK;      //the IK controllers for the ears
 
+
+    //player sounds
+    public AudioClip[] steps;       //holds stepping sound effects
+    public float stepSpeed;
+    private float stepCounter;
+    private AudioSource audioSource;
+    
+
     //IK ears stuff
     const float STARTING_X = -0.005f;
     const float EAR_TRAVEL_DIST = 0.1f;
@@ -21,6 +29,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Fixed Update for physics
@@ -38,6 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateBodyHeadOrientation();
         AdjustEars();
+        UpdateWalkSound();
     }
 
     //Adjust the orietnation of the head & body orientation
@@ -60,6 +70,18 @@ public class PlayerController : MonoBehaviour
             Vector3 locPos = t.localPosition;
             locPos.x = STARTING_X - rb.velocity.sqrMagnitude * EAR_TRAVEL_DIST;
             t.localPosition = locPos;
+        }
+    }
+
+    //Plays the walk sounds
+    void UpdateWalkSound()
+    {
+        stepCounter += rb.velocity.magnitude * Time.deltaTime;
+        if(stepCounter > stepSpeed)
+        {
+            audioSource.PlayOneShot(steps[Random.Range(0, steps.Length-1)]);
+            Debug.Log("STEPPED");
+            stepCounter = 0;
         }
     }
 }
