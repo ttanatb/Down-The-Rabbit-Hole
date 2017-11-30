@@ -24,8 +24,16 @@ public class StaticObject : MonoBehaviour
         Debug.Log("collision");
         if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Goal")
         {
-            
-            sceneChange.ChangeState(SceneChange.SceneState.Win);
+            //if the current level plus one equals the maximum amount of levels
+            if(sceneChange.LevelCount+1 == sceneChange.MaxLevels)
+            {
+                sceneChange.ChangeState(SceneChange.SceneState.Win);
+            }
+            else
+            {
+                //otherwise go to the next level;
+                sceneChange.IncrementLevel();
+            }
         }
 
         else if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Collectable")

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour {
-
+    int levelCount;
+    int maxLevels;
     public enum SceneState
     {
          Play, Win, Lose, MainMenu
@@ -15,11 +16,13 @@ public class SceneChange : MonoBehaviour {
     void Awake()
     {
         state = CheckState();
+        
     }
     // Use this for initialization
     void Start () {
-        
-        
+
+        levelCount = SceneManager.GetActiveScene().buildIndex;
+        maxLevels = SceneManager.sceneCount - 2;
         if (state == SceneState.Play||state == SceneState.MainMenu)
         {
             menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
@@ -57,7 +60,7 @@ public class SceneChange : MonoBehaviour {
         }
         else if (state == SceneState.Play)
         {
-            SceneManager.LoadScene("W2Sprint");
+            SceneManager.LoadScene(0);
             state = SceneState.Play;
         }
 
@@ -75,9 +78,16 @@ public class SceneChange : MonoBehaviour {
         else if (SceneManager.GetActiveScene().name == "Lose_Screne")
             return SceneState.Lose;
         else
+
             return SceneState.Play;
 
     }
+
+    public void IncrementLevel()
+    {
+        SceneManager.LoadScene(levelCount + 1);
+    }
+
     /// <summary>
     /// Returns current state
     /// </summary>
@@ -87,5 +97,12 @@ public class SceneChange : MonoBehaviour {
      
     }
 
-
+    public int LevelCount
+    {
+        get { return levelCount; }
+    }
+    public int MaxLevels
+    {
+        get { return maxLevels; }
+    }
 }
