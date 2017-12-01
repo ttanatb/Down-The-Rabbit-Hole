@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateBodyHeadOrientation();
         AdjustEars();
-        UpdateWalkSound();
+        //UpdateWalkSound();
     }
 
     //Adjust the orietnation of the head & body orientation
