@@ -102,20 +102,14 @@ public class SightLine : MonoBehaviour {
 
             if (maxAng > 360)//if we are looping around 0
             {
-                maxAng -= 360;//set the Maximum angle to a small number(below 360).
-                //Player is greater than the minimum, or less than the maximum;
-                if (playerAng > minAng && playerAng < maxAng)
-                {//This is OR not AND because of the looping around 0;
-                    return true;
-                }
-                return false;
+                maxAng -= 360;//set the Maximum angle to a small number(below 360).                
 
             }
-            else if(minAng < 0)//if we are looping around 0
-            {
-                minAng += 360;//set the Maximum angle to a small number(below 360).
-                //Player is greater than the minimum, or less than the maximum;
-                if(playerAng < minAng || playerAng > maxAng)
+
+
+            if(minAng >maxAng)//if we are looping around 0
+            {               
+               if(playerAng > minAng || playerAng < maxAng)
                 {//This is OR not AND because of the looping around 0;
                     return true;
                 }               
