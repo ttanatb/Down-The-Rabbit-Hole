@@ -1,0 +1,364 @@
+fileFormatVersion: 2
+guid: 2e57dead5957d8e4f8a34163142f9afe
+timeCreated: 1512452376
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: slug_head
+    21300002: slug_body
+    21300004: slug_larm1
+    21300006: slug_rarm1
+    21300008: slug_larm2
+    21300010: slug_rarm2
+    21300012: slug_larm3
+    21300014: slug_rarm3
+    21300016: slug_larm4
+    21300018: slug_rarm4
+    21300020: slug_larm5
+    21300022: slug_rarm5
+    21300024: slug_larm6
+    21300026: slug_rarm6
+    21300028: slug_larm7
+    21300030: slug_rarm7
+    21300032: slug_LMouth
+    21300034: slug_LBackMouth
+    21300036: slug_RMouth
+    21300038: slug_RBack_Mouth
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: slug_head
+      rect:
+        serializedVersion: 2
+        x: 25.000002
+        y: 156
+        width: 49
+        height: 44
+      alignment: 9
+      pivot: {x: 0.4893877, y: 0.2038876}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_body
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 12
+        width: 77
+        height: 174
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 115.00001
+        width: 61
+        height: 27.999992
+      alignment: 9
+      pivot: {x: 0.82638085, y: 0.44192925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 115.00001
+        width: 64
+        height: 27.999992
+      alignment: 9
+      pivot: {x: 0.16059017, y: 0.47546372}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 91
+        width: 55
+        height: 27
+      alignment: 9
+      pivot: {x: 0.83915186, y: 0.43977866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 91
+        width: 56
+        height: 27
+      alignment: 9
+      pivot: {x: 0.18701105, y: 0.47455513}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 67
+        width: 54
+        height: 26
+      alignment: 9
+      pivot: {x: 0.82691425, y: 0.43261722}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm3
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 67
+        width: 54
+        height: 25
+      alignment: 9
+      pivot: {x: 0.19627042, y: 0.41236296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 50
+        width: 48
+        height: 23
+      alignment: 9
+      pivot: {x: 0.8299264, y: 0.48639166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm4
+      rect:
+        serializedVersion: 2
+        x: 66.5
+        y: 50
+        width: 47
+        height: 23
+      alignment: 9
+      pivot: {x: 0.19099003, y: 0.49999985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm5
+      rect:
+        serializedVersion: 2
+        x: 10.000001
+        y: 34
+        width: 36
+        height: 20
+      alignment: 9
+      pivot: {x: 0.8042951, y: 0.6095465}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm5
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 34
+        width: 35.999992
+        height: 20
+      alignment: 9
+      pivot: {x: 0.46720704, y: 0.6701313}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm6
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 18
+        width: 29
+        height: 21
+      alignment: 9
+      pivot: {x: 0.75902545, y: 0.574521}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm6
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 18
+        width: 30
+        height: 21
+      alignment: 9
+      pivot: {x: 0.48419827, y: 0.56611}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_larm7
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 23
+        height: 17
+      alignment: 9
+      pivot: {x: 0.7313397, y: 0.53682166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_rarm7
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 1
+        width: 23
+        height: 17
+      alignment: 9
+      pivot: {x: 0.50539136, y: 0.51038885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_LMouth
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136.89536
+        width: 32.540825
+        height: 63.104645
+      alignment: 9
+      pivot: {x: 0.7621268, y: 0.17937382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_LBackMouth
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 165
+        width: 22
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5700427, y: 0.28964975}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_RMouth
+      rect:
+        serializedVersion: 2
+        x: 88.1585
+        y: 135.75192
+        width: 37
+        height: 64.24808
+      alignment: 9
+      pivot: {x: 0.27359855, y: 0.20346025}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: slug_RBack_Mouth
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 137
+        width: 48.44655
+        height: 63
+      alignment: 9
+      pivot: {x: 0.2406276, y: 0.1722204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 99120078401471
+  assetBundleName: 
+  assetBundleVariant: 
