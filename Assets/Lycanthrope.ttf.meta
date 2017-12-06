@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 27bd1156da38ff9498d55ae36d1169ed
+timeCreated: 1512575108
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Lycanthrope
+  fontNames:
+  - Lycanthrope
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
