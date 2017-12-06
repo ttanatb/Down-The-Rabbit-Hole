@@ -55,6 +55,9 @@ public class EnemyMovement : MonoBehaviour
     private bool justMoved;
     private int currentPathPoint;
     public List<GameObject> pathPoints;
+    private Animator[] holeAnimators;
+    private ParticleSystem[] holeParticleSystems;
+
     #endregion
 
     #region Start
@@ -77,14 +80,26 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.rotation = pathPoints[0].transform.rotation;
             transform.position = pathPoints[0].transform.position;
+
+            holeAnimators = new Animator[pathPoints.Count];
+            holeParticleSystems = new ParticleSystem[pathPoints.Count];
+            for (int i = 0; i < pathPoints.Count; i++)
+            {
+                holeAnimators[i] = pathPoints[i].GetComponent<Animator>();
+                holeParticleSystems[i] = pathPoints[i].GetComponentInChildren<ParticleSystem>();
+            }
+
+            PlayHoleAnimation();
+
         }
 
         // If you are a beast (investigation unit) set the visual radius for the hearing distance
-        if(enemyType == EnemyType.Beast)
+        if (enemyType == EnemyType.Beast)
         {
             GameObject HearingRadius = transform.GetChild(0).gameObject;
             HearingRadius.transform.localScale = new Vector3(hearDistance * 1.5f, hearDistance * 1.5f, 0);
         }
+
 
     }
     #endregion
@@ -114,6 +129,7 @@ public class EnemyMovement : MonoBehaviour
                 if (justMoved == false)
                 {
                     Invoke("SwitchLocations", timeBetweenPoints);
+                    Invoke("PlayHoleAnimation", timeBetweenPoints);
                     justMoved = true;
                 }
                 break;
@@ -214,9 +230,16 @@ public class EnemyMovement : MonoBehaviour
         currentPathPoint = nextHoleNum;
         transform.rotation = pathPoints[currentPathPoint].transform.rotation;
         transform.position = pathPoints[currentPathPoint].transform.position;
+        holeParticleSystems[currentPathPoint].Play();
 
         Invoke("ResetMovementVariable", Time.deltaTime * timeBetweenPoints);
     }
+
+    void PlayHoleAnimation()
+    {
+        holeAnimators[(currentPathPoint + 1) % holeAnimators.Length].SetTrigger("Rumble");
+    }
+
 
     /// <summary>
     /// Basic Path Following
