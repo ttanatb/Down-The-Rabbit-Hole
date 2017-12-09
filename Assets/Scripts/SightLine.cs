@@ -70,7 +70,7 @@ public class SightLine : MonoBehaviour {
             if (SightLineCheck())
             {                
                 Debug.Log("HIT");
-                sceneChange.ChangeState(SceneChange.SceneState.Lose);
+                sceneChange.ResetLevel();
             }
              
         }

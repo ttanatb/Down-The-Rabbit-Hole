@@ -32,12 +32,16 @@ public class StaticObject : MonoBehaviour
             else
             {
                 //otherwise go to the next level;
+                PlayerTimer plaTimer = collision.GetComponentInParent<PlayerTimer>();
+                plaTimer.End(sceneChange.LevelCount);
                 sceneChange.IncrementLevel();
+               
             }
         }
 
         else if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Collectable")
         {
+            PlayerPrefs.SetInt("colLevel" + sceneChange.LevelCount, 1);//Change colLevel(1) to true, to signifify that the collectable has been collected.
 
             Collider2D myCollider = gameObject.GetComponentInParent<Collider2D>();
             myCollider.enabled = false;
