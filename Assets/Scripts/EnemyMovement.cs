@@ -51,12 +51,13 @@ public class EnemyMovement : MonoBehaviour
     bool returnedHome;
     Vector3 investigationPoint;
 
-
     private bool justMoved;
     private int currentPathPoint;
     public List<GameObject> pathPoints;
     private Animator[] holeAnimators;
     private ParticleSystem[] holeParticleSystems;
+
+    private Animator beastAnimator;
 
     #endregion
 
@@ -97,7 +98,8 @@ public class EnemyMovement : MonoBehaviour
         if (enemyType == EnemyType.Beast)
         {
             GameObject HearingRadius = transform.GetChild(0).gameObject;
-            HearingRadius.transform.localScale = new Vector3(hearDistance * 1.5f, hearDistance * 1.5f, 0);
+            HearingRadius.transform.localScale = new Vector3(hearDistance * 3f, hearDistance * 3f, 0);
+            beastAnimator = GetComponentInChildren<Animator>();
         }
 
 
@@ -149,6 +151,7 @@ public class EnemyMovement : MonoBehaviour
                     // Set investigation bool to true and returnedHome (at initial position) to false
                     investigating = true;
                     returnedHome = false;
+                    beastAnimator.SetBool("isWalking", true);
                 }
 
                 // Have the enemy investigate the sound heard
@@ -166,6 +169,7 @@ public class EnemyMovement : MonoBehaviour
                     if ((startingPosition - transform.position).magnitude < .1f)
                     {
                         returnedHome = true;
+                        beastAnimator.SetBool("isWalking", false);
                         GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
                     }
                 }
