@@ -89,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
                 holeParticleSystems[i] = pathPoints[i].GetComponentInChildren<ParticleSystem>();
             }
 
-            Invoke("PlayHoleAnimation", timeBetweenPoints - 2f);
+            Invoke("PlayHoleAnimation", timeBetweenPoints - 1.5f);
 
         }
 
@@ -129,7 +129,7 @@ public class EnemyMovement : MonoBehaviour
                 if (justMoved == false)
                 {
                     Invoke("SwitchLocations", timeBetweenPoints);
-                    Invoke("PlayHoleAnimation", timeBetweenPoints - 2f);
+                    Invoke("PlayHoleAnimation", timeBetweenPoints - 1.5f);
                     justMoved = true;
                 }
                 break;
