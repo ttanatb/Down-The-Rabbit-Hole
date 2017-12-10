@@ -88,6 +88,13 @@ public class SceneChange : MonoBehaviour {
         SceneManager.LoadScene(levelCount + 1);
     }
 
+    public void ResetLevel()
+    {
+        PlayerPrefs.SetInt("colLevel" + LevelCount, 0); 
+        SceneManager.LoadScene(LevelCount);
+    }
+
+
     /// <summary>
     /// Returns current state
     /// </summary>

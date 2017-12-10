@@ -8,22 +8,25 @@ public class SightLine : MonoBehaviour {
     Vector3 playerPosition;
     Vector3 offset;
     Vector3 leftPos, rightPos, centerPos;
+
     float minAng, maxAng;
 
     LineRenderer myRenderer;
 
     SceneChange sceneChange;
-    public GameObject Player;
+    public GameObject player;
     public float offsetAngle;
     public float widthAngle;
     public float Radius;
     public Material mat;
+    public bool doRaycast;
+    public LayerMask raycastingMask;
    
     // Use this for initialization
     void Start () {
-		if (!Player)
+		if (!player)
         {
-            Player = FindObjectOfType<PlayerController>().gameObject;
+            player = FindObjectOfType<PlayerController>().gameObject;
         }
         myRenderer = GetComponent<LineRenderer>();
         sceneChange = GameObject.Find("SceneManager").GetComponent<SceneChange>();
@@ -32,7 +35,7 @@ public class SightLine : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         position = gameObject.transform.position;
-        playerPosition = Player.transform.position;
+        playerPosition = player.transform.position;
        // Vector3 playerToMonster = playerPosition - position;
        // playerPosition = playerPosition - (playerToMonster.normalized * .35f);
         offset = playerPosition - position;
@@ -70,7 +73,7 @@ public class SightLine : MonoBehaviour {
             if (SightLineCheck())
             {                
                 Debug.Log("HIT");
-                sceneChange.ChangeState(SceneChange.SceneState.Lose);
+                sceneChange.ResetLevel();
             }
              
         }
@@ -111,6 +114,10 @@ public class SightLine : MonoBehaviour {
             {               
                if(playerAng > minAng || playerAng < maxAng)
                 {//This is OR not AND because of the looping around 0;
+                    if(doRaycast)
+                    {
+
+                    }
                     return true;
                 }               
                 return false;
@@ -120,6 +127,16 @@ public class SightLine : MonoBehaviour {
             {//If the player is Greater than the minimum and less than the maximum
                 if (playerAng > minAng && playerAng < maxAng)
                 {
+                    if (doRaycast)
+                    {
+                        RaycastHit2D didHit = Physics2D.Raycast(position, offset, Radius*2, raycastingMask);
+                        if(didHit.collider.tag == "Player")
+                        {
+                            return true;
+                        }
+                        return false;
+
+                    }
                     return true;
                 }
                 return false;
