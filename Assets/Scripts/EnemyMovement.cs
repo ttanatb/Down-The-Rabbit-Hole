@@ -89,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
                 holeParticleSystems[i] = pathPoints[i].GetComponentInChildren<ParticleSystem>();
             }
 
-            PlayHoleAnimation();
+            Invoke("PlayHoleAnimation", timeBetweenPoints - 2f);
 
         }
 
@@ -129,7 +129,7 @@ public class EnemyMovement : MonoBehaviour
                 if (justMoved == false)
                 {
                     Invoke("SwitchLocations", timeBetweenPoints);
-                    Invoke("PlayHoleAnimation", timeBetweenPoints);
+                    Invoke("PlayHoleAnimation", timeBetweenPoints - 2f);
                     justMoved = true;
                 }
                 break;
@@ -222,6 +222,8 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void SwitchLocations()
     {
+        holeAnimators[currentPathPoint].SetBool("isRumbling", false);
+
         // Get the next hole number
         int nextHoleNum = currentPathPoint+1;
         nextHoleNum %= pathPoints.Count;
@@ -237,7 +239,7 @@ public class EnemyMovement : MonoBehaviour
 
     void PlayHoleAnimation()
     {
-        holeAnimators[(currentPathPoint + 1) % holeAnimators.Length].SetTrigger("Rumble");
+        holeAnimators[(currentPathPoint + 1) % holeAnimators.Length].SetBool("isRumbling", true);
     }
 
 
