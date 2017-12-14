@@ -180,14 +180,12 @@ public class EnemyMovement : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, startingRotation, Time.deltaTime * rotationSpeed);
                     //Debug.Log("Rotating to initail rotation");
                 }
-                
-                // Path follow if given a path
-                //PathFollow();
-                // Stationary otherwise
                 break;
 
             case EnemyType.Haunter:
-                // Stationary?
+                // Seek the player the entire level
+                TurnTowardsPoint(player.transform.position);
+                MoveTowards(player.transform.position);
                 break;
         }
     }

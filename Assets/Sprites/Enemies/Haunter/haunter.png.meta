@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: ab69720157f0a2643a34b13ec9acd4cb
+timeCreated: 1513208075
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: haunter_Head
+    21300002: haunter_LeftTentacle
+    21300004: haunter_RightTentacle
+    21300006: haunter_tentacle1
+    21300008: haunter_tentacle2
+    21300010: haunter_tentacle3
+    21300012: haunter_tentacle4
+    21300014: haunter_tentacle5
+    21300016: haunter_tentacle6
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: haunter_Head
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 294
+        width: 197
+        height: 124
+      alignment: 9
+      pivot: {x: 0.4859232, y: 0.43711188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_LeftTentacle
+      rect:
+        serializedVersion: 2
+        x: 17.000008
+        y: 168
+        width: 71
+        height: 119
+      alignment: 9
+      pivot: {x: 0.8222239, y: 0.86702573}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_RightTentacle
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 14
+        width: 43
+        height: 134
+      alignment: 9
+      pivot: {x: 0.741838, y: 0.8880246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle1
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 14
+        width: 58
+        height: 131
+      alignment: 9
+      pivot: {x: 0.4641413, y: 0.907495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle2
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 8
+        width: 41
+        height: 133
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.9117923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle3
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 9
+        width: 58
+        height: 132
+      alignment: 9
+      pivot: {x: 0.2609411, y: 0.88339984}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle4
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 0
+        width: 46
+        height: 130
+      alignment: 9
+      pivot: {x: 0.7260663, y: 0.88457936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle5
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 6.0000076
+        width: 55
+        height: 129
+      alignment: 9
+      pivot: {x: 0.23529649, y: 0.8708193}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: haunter_tentacle6
+      rect:
+        serializedVersion: 2
+        x: 116.00001
+        y: 168
+        width: 71.99999
+        height: 119
+      alignment: 9
+      pivot: {x: 0.16299301, y: 0.8903291}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
