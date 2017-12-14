@@ -45,6 +45,17 @@ public class PlayerTimer : MonoBehaviour {
 
     public void End(int incLevel)
     {
+        if (PlayerPrefs.GetInt("colLevel" + incLevel)== 1)
+        {
+            if(timeScore > 10)
+            {
+                timeScore -= 5;
+            }
+            else
+            {
+                timeScore = timeScore / 2;
+            }
+        }
         PlayerPrefs.SetFloat(("Level" + incLevel), timeScore);
         //keep the players time score from increasing
         timePaused = true;
