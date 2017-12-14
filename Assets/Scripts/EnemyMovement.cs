@@ -252,7 +252,7 @@ public class EnemyMovement : MonoBehaviour
     void PathFollow()
     {
         // If the enemy unit gets close enough to the path point it advances the current path point
-        if ((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .01f)
+        if ((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .1f)
         {
             // Get the next hole number and set it as the new currentPathPoint
             int nextHoleNum = currentPathPoint + 1;
