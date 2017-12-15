@@ -56,7 +56,12 @@ public class PlayerTimer : MonoBehaviour {
                 timeScore = timeScore / 2;
             }
         }
-        PlayerPrefs.SetFloat(("Level" + incLevel), timeScore);
+        if (PlayerPrefs.GetFloat("Level" + incLevel) > timeScore || PlayerPrefs.GetFloat("Level" + incLevel) <= 0)
+        {//if the new score is lower, or the old score is a default value, replace with the new score        
+            PlayerPrefs.SetFloat(("Level" + incLevel), timeScore);
+        }
+
+        PlayerPrefs.SetInt("colLevel" + incLevel, 0);//reset collectable value
         //keep the players time score from increasing
         timePaused = true;
     }
