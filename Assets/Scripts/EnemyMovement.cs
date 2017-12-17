@@ -54,8 +54,11 @@ public class EnemyMovement : MonoBehaviour
     private bool justMoved;
     private int currentPathPoint;
     public List<GameObject> pathPoints;
+
+    //For Dholes
     private Animator[] holeAnimators;
     private ParticleSystem[] holeParticleSystems;
+    private AudioSource[] holeAudioSrcs;
 
     private Animator beastAnimator;
 
@@ -84,10 +87,12 @@ public class EnemyMovement : MonoBehaviour
 
             holeAnimators = new Animator[pathPoints.Count];
             holeParticleSystems = new ParticleSystem[pathPoints.Count];
+            holeAudioSrcs = new AudioSource[pathPoints.Count];
             for (int i = 0; i < pathPoints.Count; i++)
             {
                 holeAnimators[i] = pathPoints[i].GetComponent<Animator>();
                 holeParticleSystems[i] = pathPoints[i].GetComponentInChildren<ParticleSystem>();
+                holeAudioSrcs[i] = pathPoints[i].GetComponent<AudioSource>();
             }
 
             Invoke("PlayHoleAnimation", timeBetweenPoints - 1.5f);
@@ -244,6 +249,8 @@ public class EnemyMovement : MonoBehaviour
         transform.rotation = pathPoints[currentPathPoint].transform.rotation;
         transform.position = pathPoints[currentPathPoint].transform.position;
         holeParticleSystems[currentPathPoint].Play();
+        holeAudioSrcs[currentPathPoint].pitch = Random.Range(0.8f, 1.1f);
+        holeAudioSrcs[currentPathPoint].Play();
 
         Invoke("ResetMovementVariable", Time.deltaTime * timeBetweenPoints);
     }
