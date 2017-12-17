@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
     public float stepSpeed;
     private float stepCounter;
     private AudioSource audioSource;
-    
+
+    //Animator
+    private Animator animator;
 
     //IK ears stuff
     const float STARTING_X = -0.005f;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
     // Fixed Update for physics
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateBodyHeadOrientation();
         AdjustEars();
+        UpdateAnimation();
         //UpdateWalkSound();
     }
 
@@ -83,5 +87,21 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("STEPPED");
             stepCounter = 0;
         }
+    }
+
+    void UpdateAnimation()
+    {
+        float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
+        if (speed < 0.5f)
+        {
+            animator.SetBool("IsMoving", false);
+        } 
+        else
+        {
+            animator.SetBool("IsMoving", true);
+            animator.speed = speed / 8f;
+        }
+        
+        //Debug.Log(Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
     }
 }
