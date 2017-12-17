@@ -40,10 +40,12 @@ public class MenuManager : MonoBehaviour
         if (currentMenu == MenuState.None && Input.GetKeyDown(KeyCode.Escape))
         {
             ChangeMenu(MenuState.Pause);
+            SightLine.IsPaused = true;
         }
         else if (currentMenu == MenuState.Pause && Input.GetKeyDown(KeyCode.Escape))
         {
             ChangeMenu(MenuState.None);
+            SightLine.IsPaused = false;
         }
 
         //Pause time in all menus but the game
