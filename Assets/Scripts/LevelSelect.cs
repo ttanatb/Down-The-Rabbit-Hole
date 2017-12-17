@@ -15,7 +15,14 @@ public class LevelSelect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		text.text = "Level "  + (levelToLoad + 1) + " | Time: " + PlayerPrefs.GetFloat(("Level" + levelToLoad));
+        if (PlayerPrefs.GetFloat(("Level" + levelToLoad)) == 0)
+        {
+            text.text = "Level " + (levelToLoad + 1) + " | Not Completed";
+        }
+        else
+        {
+            text.text = "Level " + (levelToLoad + 1) + " | Time: " + PlayerPrefs.GetFloat(("Level" + levelToLoad));
+        }
     }
 
     public void LoadLevel()
