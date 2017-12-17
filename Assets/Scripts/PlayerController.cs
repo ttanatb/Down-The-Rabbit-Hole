@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
 
 
     //player sounds
-    public AudioClip[] steps;       //holds stepping sound effects
-    public float stepSpeed;
+    //public AudioClip[] steps;       //holds stepping sound effects
+    public float stepSpeed = 1f;
     private float stepCounter;
-    private AudioSource audioSource;
+    private AudioSource stepAudioSrc;
+
+    private AudioSource thudSrc;
 
     //Animator
     private Animator animator;
@@ -31,8 +33,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        thudSrc = audioSources[0];
+        stepAudioSrc = audioSources[1];
     }
 
     // Fixed Update for physics
@@ -50,8 +55,10 @@ public class PlayerController : MonoBehaviour
     {
         UpdateBodyHeadOrientation();
         AdjustEars();
-        UpdateAnimation();
-        //UpdateWalkSound();
+
+        float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
+        UpdateAnimation(speed);
+        UpdateWalkSound(speed);
     }
 
     //Adjust the orietnation of the head & body orientation
@@ -78,20 +85,19 @@ public class PlayerController : MonoBehaviour
     }
 
     //Plays the walk sounds
-    void UpdateWalkSound()
+    void UpdateWalkSound(float speed)
     {
-        stepCounter += rb.velocity.magnitude * Time.deltaTime;
+        stepCounter += speed * Time.deltaTime;
         if(stepCounter > stepSpeed)
         {
-            audioSource.PlayOneShot(steps[Random.Range(0, steps.Length-1)]);
-            //Debug.Log("STEPPED");
+            stepAudioSrc.pitch = Random.Range(0.75f, 1.25f);
+            stepAudioSrc.Play();
             stepCounter = 0;
         }
     }
 
-    void UpdateAnimation()
+    void UpdateAnimation(float speed)
     {
-        float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
         if (speed < 0.5f)
         {
             animator.SetBool("IsMoving", false);
@@ -101,7 +107,14 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsMoving", true);
             animator.speed = speed / 8f;
         }
-        
-        //Debug.Log(Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            thudSrc.pitch = Random.Range(0.85f, 1.15f);
+            thudSrc.Play();
+        }
     }
 }
