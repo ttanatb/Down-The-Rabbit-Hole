@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource thudSrc;
 
+    private float movementSpeed;
+
     //Animator
     private Animator animator;
 
@@ -56,9 +58,9 @@ public class PlayerController : MonoBehaviour
         UpdateBodyHeadOrientation();
         AdjustEars();
 
-        float speed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
-        UpdateAnimation(speed);
-        UpdateWalkSound(speed);
+        movementSpeed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y);
+        UpdateAnimation(movementSpeed);
+        UpdateWalkSound(movementSpeed);
     }
 
     //Adjust the orietnation of the head & body orientation
@@ -113,6 +115,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall")
         {
+            if (movementSpeed < 7.5f) return;
+
             thudSrc.pitch = Random.Range(0.85f, 1.15f);
             thudSrc.Play();
         }
