@@ -91,6 +91,9 @@ public class SceneChange : MonoBehaviour {
     public void IncrementLevel()
     {
         SightLine.IsPaused = true;
+        if (!player)
+            player = FindObjectOfType<PlayerController>();
+
         player.Win();
 
         Invoke("LoadNextScene", 1f);
@@ -99,7 +102,8 @@ public class SceneChange : MonoBehaviour {
     public void ResetLevel()
     {
         PlayerPrefs.SetInt("colLevel" + LevelCount, 0);
-
+        if (!player)
+            player = FindObjectOfType<PlayerController>();
         player.Die();
         Invoke("ReloadScene", 1f);
     }
