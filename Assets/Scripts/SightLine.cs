@@ -22,11 +22,15 @@ public class SightLine : MonoBehaviour {
     public bool doRaycast;
     public LayerMask raycastingMask;
 
-    private bool isPaused = false;
-    public bool IsPaused { get { return isPaused; } }
+    static private bool isPaused = false;
+    static public bool IsPaused {
+        get { return isPaused; }
+        set { isPaused = value; }
+    }
    
     // Use this for initialization
     void Start () {
+        isPaused = false;
 		if (!player)
         {
             player = FindObjectOfType<PlayerController>().gameObject;

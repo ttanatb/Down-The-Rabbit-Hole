@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource thudSrc;
     private AudioSource deathSrc;
+    private AudioSource winSrc;
 
     private float movementSpeed;
 
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         thudSrc = audioSources[0];
         stepAudioSrc = audioSources[1];
         deathSrc = audioSources[3];
+        winSrc = audioSources[4];
     }
 
     // Fixed Update for physics
@@ -95,6 +97,16 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         deathSrc.Play();
+        isPaused = true;
+        rb.drag = float.MaxValue;
+        animator.SetBool("IsMoving", false);
+    }
+
+    public void Win()
+    {
+        if (winSrc.isPlaying) return;
+
+        winSrc.Play();
         isPaused = true;
         rb.drag = float.MaxValue;
         animator.SetBool("IsMoving", false);
