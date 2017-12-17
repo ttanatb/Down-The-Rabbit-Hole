@@ -9,7 +9,7 @@ public class StaticObject : MonoBehaviour
     void Start()
     {
         sceneChange = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneChange>();
-        Debug.Log(sceneChange.State);
+        //Debug.Log(sceneChange.State);
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class StaticObject : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
 
-        Debug.Log("collision");
+        //Debug.Log("collision");
         if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Goal")
         {
             //if the current level plus one equals the maximum amount of levels

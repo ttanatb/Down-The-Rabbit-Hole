@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         if(stepCounter > stepSpeed)
         {
             audioSource.PlayOneShot(steps[Random.Range(0, steps.Length-1)]);
-            Debug.Log("STEPPED");
+            //Debug.Log("STEPPED");
             stepCounter = 0;
         }
     }

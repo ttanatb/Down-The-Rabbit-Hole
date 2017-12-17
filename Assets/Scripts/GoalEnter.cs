@@ -23,7 +23,7 @@ public class GoalEnter : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("You win, you dork!");
+            //Debug.Log("You win, you dork!");
         }
     }
 }
