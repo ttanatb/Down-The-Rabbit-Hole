@@ -61,6 +61,8 @@ public class EnemyMovement : MonoBehaviour
     private AudioSource[] holeAudioSrcs;
 
     private Animator beastAnimator;
+    private AudioSource beastAudioSrc;
+    private bool finishedInvestigating = true;
 
     #endregion
 
@@ -105,6 +107,7 @@ public class EnemyMovement : MonoBehaviour
             GameObject HearingRadius = transform.GetChild(0).gameObject;
             HearingRadius.transform.localScale = new Vector3(hearDistance * 3f, hearDistance * 3f, 0);
             beastAnimator = GetComponentInChildren<Animator>();
+            beastAudioSrc = GetComponents<AudioSource>()[1];
         }
 
 
@@ -162,6 +165,16 @@ public class EnemyMovement : MonoBehaviour
                     investigating = true;
                     returnedHome = false;
                     beastAnimator.SetBool("isWalking", true);
+
+                    if (finishedInvestigating)
+                    {
+                        finishedInvestigating = false;
+                        beastAudioSrc.Play();
+                    }
+                }
+                else
+                {
+                    finishedInvestigating = true;
                 }
 
                 // Have the enemy investigate the sound heard
