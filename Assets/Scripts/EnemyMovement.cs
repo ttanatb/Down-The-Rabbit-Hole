@@ -237,7 +237,7 @@ public class EnemyMovement : MonoBehaviour
         float zRotationVar = transform.eulerAngles.z;
 
         // Rotate Clockwise or CounterClockwise
-        if (rotateClockwise) { zRotationVar += rotationSpeed; }
+        if (rotateClockwise) { zRotationVar += rotationSpeed*Time.deltaTime; }
         else { zRotationVar -= rotationSpeed; }
 
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
