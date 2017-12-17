@@ -20,8 +20,6 @@ public class EnemyMovement : MonoBehaviour
     // Instance of the player
     GameObject player;
 
-    SightLine sightLine;
-
     // Determines the type of enemy
     [SerializeField]
     EnemyType enemyType;
@@ -68,7 +66,6 @@ public class EnemyMovement : MonoBehaviour
     {
         // Get the instance of the player
         player = GameObject.FindGameObjectWithTag("Player");
-        sightLine = GetComponent<SightLine>();
         
         // Set the initial position of the enemy (for investigation enemies)
         startingPosition = transform.position;
@@ -113,11 +110,12 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (sightLine.IsPaused)
-        {
-            GetComponent<Rigidbody2D>().drag = float.MaxValue;
-        }
         Move();
+        if (SightLine.IsPaused)
+        {
+            if (GetComponent<Rigidbody2D>())
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
 	}
     #endregion
 
@@ -216,7 +214,7 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void RotateInPlace()
     {
-        if (sightLine.IsPaused) return;
+        if (SightLine.IsPaused) return;
 
         float zRotationVar = transform.eulerAngles.z;
 
@@ -233,7 +231,7 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void SwitchLocations()
     {
-        if (sightLine.IsPaused) return;
+        if (SightLine.IsPaused) return;
 
         holeAnimators[currentPathPoint].SetBool("isRumbling", false);
 
@@ -252,7 +250,7 @@ public class EnemyMovement : MonoBehaviour
 
     void PlayHoleAnimation()
     {
-        if (sightLine.IsPaused) return;
+        if (SightLine.IsPaused) return;
 
         holeAnimators[(currentPathPoint + 1) % holeAnimators.Length].SetBool("isRumbling", true);
     }

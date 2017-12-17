@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour {
+    private PlayerController player;
     int levelCount;
     int maxLevels;
     public enum SceneState
@@ -27,6 +28,8 @@ public class SceneChange : MonoBehaviour {
         {
             menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
         }
+
+        player = FindObjectOfType<PlayerController>();
 	}
 
     // Update is called once per frame
@@ -50,8 +53,8 @@ public class SceneChange : MonoBehaviour {
             return;   //do nothing
         else if (state == SceneState.Win)
         {
-            SceneManager.LoadScene("Win_Screne");
             state = SceneState.Win;
+            SceneManager.LoadScene("Win_Screne");
         }
         else if (state == SceneState.Lose)
         {
@@ -63,9 +66,11 @@ public class SceneChange : MonoBehaviour {
             SceneManager.LoadScene(0);
             state = SceneState.Play;
         }
+    }
 
-        
-
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(levelCount + 1);
     }
     /// <summary>
     /// Helper method for intialization
@@ -85,15 +90,17 @@ public class SceneChange : MonoBehaviour {
 
     public void IncrementLevel()
     {
-        SceneManager.LoadScene(levelCount + 1);
+        SightLine.IsPaused = true;
+        player.Win();
+
+        Invoke("LoadNextScene", 1f);
     }
 
     public void ResetLevel()
     {
         PlayerPrefs.SetInt("colLevel" + LevelCount, 0);
-        PlayerController player = FindObjectOfType<PlayerController>(); //.PlayDeathAudio();
+
         player.Die();
-        //Time.timeScale = 0f;
         Invoke("ReloadScene", 1f);
     }
 
