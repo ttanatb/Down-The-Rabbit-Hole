@@ -20,6 +20,8 @@ public class EnemyMovement : MonoBehaviour
     // Instance of the player
     GameObject player;
 
+    SightLine sightLine;
+
     // Determines the type of enemy
     [SerializeField]
     EnemyType enemyType;
@@ -66,6 +68,7 @@ public class EnemyMovement : MonoBehaviour
     {
         // Get the instance of the player
         player = GameObject.FindGameObjectWithTag("Player");
+        sightLine = GetComponent<SightLine>();
         
         // Set the initial position of the enemy (for investigation enemies)
         startingPosition = transform.position;
@@ -110,6 +113,10 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if (sightLine.IsPaused)
+        {
+            GetComponent<Rigidbody2D>().drag = float.MaxValue;
+        }
         Move();
 	}
     #endregion
@@ -209,6 +216,8 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void RotateInPlace()
     {
+        if (sightLine.IsPaused) return;
+
         float zRotationVar = transform.eulerAngles.z;
 
         // Rotate Clockwise or CounterClockwise
@@ -224,6 +233,8 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void SwitchLocations()
     {
+        if (sightLine.IsPaused) return;
+
         holeAnimators[currentPathPoint].SetBool("isRumbling", false);
 
         // Get the next hole number
@@ -241,6 +252,8 @@ public class EnemyMovement : MonoBehaviour
 
     void PlayHoleAnimation()
     {
+        if (sightLine.IsPaused) return;
+
         holeAnimators[(currentPathPoint + 1) % holeAnimators.Length].SetBool("isRumbling", true);
     }
 
@@ -251,6 +264,7 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void PathFollow()
     {
+
         // If the enemy unit gets close enough to the path point it advances the current path point
         if ((transform.position - pathPoints[currentPathPoint].transform.position).magnitude <= .1f)
         {
@@ -297,6 +311,7 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void MoveTowards(Vector3 point)
     {
+
         // Rotate the view of the enemy towards the new point
         //transform.rotation = TurnTowardsPoint(point);
 

@@ -90,7 +90,15 @@ public class SceneChange : MonoBehaviour {
 
     public void ResetLevel()
     {
-        PlayerPrefs.SetInt("colLevel" + LevelCount, 0); 
+        PlayerPrefs.SetInt("colLevel" + LevelCount, 0);
+        PlayerController player = FindObjectOfType<PlayerController>(); //.PlayDeathAudio();
+        player.Die();
+        //Time.timeScale = 0f;
+        Invoke("ReloadScene", 1f);
+    }
+
+    private void ReloadScene()
+    {
         SceneManager.LoadScene(LevelCount);
     }
 
@@ -98,7 +106,7 @@ public class SceneChange : MonoBehaviour {
     /// <summary>
     /// Returns current state
     /// </summary>
-   public SceneState State
+    public SceneState State
     {
         get { return state; }
      

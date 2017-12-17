@@ -5,10 +5,13 @@ using UnityEngine;
 public class StaticObject : MonoBehaviour
 {
     SceneChange sceneChange;
+    AudioSource collectSrc;
+
     // Use this for initialization
     void Start()
     {
         sceneChange = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneChange>();
+        collectSrc = GetComponent<AudioSource>();
         //Debug.Log(sceneChange.State);
     }
 
@@ -47,6 +50,7 @@ public class StaticObject : MonoBehaviour
             myCollider.enabled = false;
             SpriteRenderer myRenderer = gameObject.GetComponentInParent<SpriteRenderer>();
             myRenderer.enabled = false;
+            collectSrc.Play();
         }
 
     }

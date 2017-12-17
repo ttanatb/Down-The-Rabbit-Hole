@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource stepAudioSrc;
 
     private AudioSource thudSrc;
+    private AudioSource deathSrc;
 
     private float movementSpeed;
 
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     const float STARTING_X = -0.005f;
     const float EAR_TRAVEL_DIST = 0.1f;
 
+    private bool isPaused = false;
+
     // Use this for initialization
     void Start()
     {
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
         AudioSource[] audioSources = GetComponents<AudioSource>();
         thudSrc = audioSources[0];
         stepAudioSrc = audioSources[1];
+        deathSrc = audioSources[3];
     }
 
     // Fixed Update for physics
@@ -55,6 +59,8 @@ public class PlayerController : MonoBehaviour
     // Update visual effects
     private void Update()
     {
+        if (isPaused) return;
+
         UpdateBodyHeadOrientation();
         AdjustEars();
 
@@ -84,6 +90,14 @@ public class PlayerController : MonoBehaviour
             locPos.x = STARTING_X - rb.velocity.sqrMagnitude * EAR_TRAVEL_DIST;
             t.localPosition = locPos;
         }
+    }
+
+    public void Die()
+    {
+        deathSrc.Play();
+        isPaused = true;
+        rb.drag = float.MaxValue;
+        animator.SetBool("IsMoving", false);
     }
 
     //Plays the walk sounds

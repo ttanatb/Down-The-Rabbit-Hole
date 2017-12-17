@@ -21,6 +21,9 @@ public class SightLine : MonoBehaviour {
     public Material mat;
     public bool doRaycast;
     public LayerMask raycastingMask;
+
+    private bool isPaused = false;
+    public bool IsPaused { get { return isPaused; } }
    
     // Use this for initialization
     void Start () {
@@ -34,6 +37,8 @@ public class SightLine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isPaused) return;
+
         position = gameObject.transform.position;
         playerPosition = player.transform.position;
        // Vector3 playerToMonster = playerPosition - position;
@@ -74,6 +79,7 @@ public class SightLine : MonoBehaviour {
             {                
                 //Debug.Log("HIT");
                 sceneChange.ResetLevel();
+                isPaused = true;
             }
              
         }
