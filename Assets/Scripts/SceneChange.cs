@@ -23,7 +23,7 @@ public class SceneChange : MonoBehaviour {
     void Start () {
 
         levelCount = SceneManager.GetActiveScene().buildIndex;
-        maxLevels = SceneManager.sceneCount - 2;
+        maxLevels = SceneManager.sceneCount - 1;
         if (state == SceneState.Play||state == SceneState.MainMenu)
         {
             menuManager = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();

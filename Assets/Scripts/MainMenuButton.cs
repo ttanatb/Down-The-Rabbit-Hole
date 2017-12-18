@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuButton : MonoBehaviour {
-    public int mainMenuScene;
+    public int mainMenuScene = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +17,6 @@ public class MainMenuButton : MonoBehaviour {
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(mainMenuScene);
+        SceneManager.LoadScene(0);
     }
 }

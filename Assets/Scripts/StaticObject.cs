@@ -28,7 +28,7 @@ public class StaticObject : MonoBehaviour
         if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Goal")
         {
             //if the current level plus one equals the maximum amount of levels
-            if(sceneChange.LevelCount+1 == sceneChange.MaxLevels)
+            if(sceneChange.LevelCount + 1 == sceneChange.MaxLevels)
             {
                 sceneChange.ChangeState(SceneChange.SceneState.Win);
             }
