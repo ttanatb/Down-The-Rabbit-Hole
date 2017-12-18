@@ -20,7 +20,8 @@ public class LevelSelect : MonoBehaviour {
         }
         else
         {
-            text.text = "Level " + (levelToLoad + 1) + " | Time: " + PlayerPrefs.GetFloat(("Level" + (levelToLoad + 1)));
+            text.text = "Level " + (levelToLoad + 1) + " | Time: " + (PlayerPrefs.GetFloat(("Level" + (levelToLoad + 1)))).ToString("0.00");
+            
         }
 
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S)) PlayerPrefs.DeleteAll();
