@@ -244,6 +244,7 @@ public class EnemyMovement : MonoBehaviour
         if (rotateClockwise) { zRotationVar += rotationSpeed * 69f * Time.deltaTime; }
         else { zRotationVar -= rotationSpeed * 69f * Time.deltaTime; }
 #endif
+
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
     }
 
@@ -348,7 +349,7 @@ public class EnemyMovement : MonoBehaviour
         // Step 2: Scale Desired to maximum speed
         //         so I move as fast as possible
         desiredVelocity.Normalize();
-        desiredVelocity *= movementSpeed;
+        desiredVelocity *= movementSpeed* Time.deltaTime;
 
         // Step 3: Calculate your Steering Force
         Vector2 steeringForce = desiredVelocity - GetComponent<Rigidbody2D>().velocity;
