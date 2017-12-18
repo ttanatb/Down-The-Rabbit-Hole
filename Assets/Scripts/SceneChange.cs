@@ -17,6 +17,7 @@ public class SceneChange : MonoBehaviour {
     void Awake()
     {
         state = CheckState();
+        Application.targetFrameRate = 30;
         
     }
     // Use this for initialization
