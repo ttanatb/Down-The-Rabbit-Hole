@@ -10,10 +10,11 @@ public class UIController : MonoBehaviour {
     public Text levelTime;
 
     private PlayerTimer player;
-	// Use this for initialization
-	void Start () {
+    public static bool hasCollectedCollectible = false;
+    // Use this for initialization
+    void Start () {
+        hasCollectedCollectible = false;
 
-  
         player = GameObject.FindObjectOfType<PlayerTimer>();
         
         levelInt.text = "Level " + SceneManager.GetActiveScene().buildIndex;
@@ -21,6 +22,14 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        levelTime.text = "Time: " + Math.Round(player.timeScore, 2);
+        float time = player.timeScore;
+        if (hasCollectedCollectible)
+        {
+            if (time < 5f)
+                time /= 2f;
+            else time -= 5f;
+        }
+
+        levelTime.text = "Time: " + Math.Round(time, 2);
 	}
 }

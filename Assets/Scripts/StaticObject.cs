@@ -45,7 +45,7 @@ public class StaticObject : MonoBehaviour
         else if (collision.transform.gameObject.tag == "Player" && gameObject.tag == "Collectable")
         {
             PlayerPrefs.SetInt("colLevel" + sceneChange.LevelCount, 1);//Change colLevel(1) to true, to signifify that the collectable has been collected.
-
+            UIController.hasCollectedCollectible = true;
             Collider2D myCollider = gameObject.GetComponentInParent<Collider2D>();
             myCollider.enabled = false;
             SpriteRenderer myRenderer = gameObject.GetComponentInParent<SpriteRenderer>();
