@@ -55,6 +55,8 @@ public class PlayerTimer : MonoBehaviour {
             {
                 timeScore = timeScore / 2;
             }
+
+            UIController.hasCollectedCollectible = false;
         }
         if (PlayerPrefs.GetFloat("Level" + incLevel) > timeScore || PlayerPrefs.GetFloat("Level" + incLevel) <= 0)
         {//if the new score is lower, or the old score is a default value, replace with the new score        

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
     public Text levelInt;
     public Text levelTime;
+    public Image collectible;
 
     private PlayerTimer player;
     public static bool hasCollectedCollectible = false;
@@ -28,6 +29,8 @@ public class UIController : MonoBehaviour {
             if (time < 5f)
                 time /= 2f;
             else time -= 5f;
+
+            collectible.enabled = true;
         }
 
         levelTime.text = "Time: " + Math.Round(time, 2);
