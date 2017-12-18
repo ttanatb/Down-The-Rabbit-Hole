@@ -349,7 +349,11 @@ public class EnemyMovement : MonoBehaviour
         // Step 2: Scale Desired to maximum speed
         //         so I move as fast as possible
         desiredVelocity.Normalize();
-        desiredVelocity *= movementSpeed* Time.deltaTime;
+#if UNITY_EDITOR
+        desiredVelocity *= movementSpeed;
+#else
+        desiredVelocity *= movementSpeed * 69f * Time.deltaTime;
+#endif
 
         // Step 3: Calculate your Steering Force
         Vector2 steeringForce = desiredVelocity - GetComponent<Rigidbody2D>().velocity;
