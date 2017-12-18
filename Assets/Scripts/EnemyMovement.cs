@@ -352,7 +352,7 @@ public class EnemyMovement : MonoBehaviour
 #if UNITY_EDITOR
         desiredVelocity *= movementSpeed;
 #else
-        desiredVelocity *= movementSpeed * 69f * Time.deltaTime;
+        desiredVelocity *= movementSpeed * 340f * Time.deltaTime;
 #endif
 
         // Step 3: Calculate your Steering Force
