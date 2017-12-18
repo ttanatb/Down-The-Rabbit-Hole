@@ -12,7 +12,7 @@ _A fast-paced, stealth game where a rabbit escapes a land of eldritch horrors_
 Check it out on [itch.io](https://beep-boppers.itch.io/down-the-rabbit-hole)
 
 ## Resources Used
-Audio        | Source     
+Audio/Font        | Source     
 ------------ | -------------
 Ambient Audio | https://freesound.org/people/kickhat/sounds/347741/
 Slug | https://freesound.org/people/billox30/sounds/167927/
@@ -24,3 +24,4 @@ Stepping | https://freesound.org/people/sbaneat/sounds/393060/
 Stepping 2 | https://freesound.org/people/pgi/sounds/211457/
 Sightlines | https://freesound.org/people/ProjectsU012/sounds/340959/
 Carrot Collection | https://freesound.org/people/DrMinky/sounds/166184/
+Lycanthrope Font | https://www.dafont.com/lycanthrope.font
