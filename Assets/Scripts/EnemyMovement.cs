@@ -236,10 +236,14 @@ public class EnemyMovement : MonoBehaviour
 
         float zRotationVar = transform.eulerAngles.z;
 
+#if UNITY_EDITOR
         // Rotate Clockwise or CounterClockwise
-        if (rotateClockwise) { zRotationVar += rotationSpeed*Time.deltaTime; }
+        if (rotateClockwise) { zRotationVar += rotationSpeed; }
         else { zRotationVar -= rotationSpeed; }
-
+#else
+        if (rotateClockwise) { zRotationVar += rotationSpeed * 69f * Time.deltaTime; }
+        else { zRotationVar -= rotationSpeed * 69f * Time.deltaTime; }
+#endif
         transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, zRotationVar));
     }
 
@@ -355,7 +359,7 @@ public class EnemyMovement : MonoBehaviour
         // Apply the force
         GetComponent<Rigidbody2D>().AddForce(steeringForce);
     }
-        #endregion
+#endregion
 
 
     }
