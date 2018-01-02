@@ -2,10 +2,10 @@
 _A fast-paced, stealth game where a rabbit escapes a land of eldritch horrors_
 
 ## Poster
-[![Image of poster](https://i.imgur.com/gzVgrWK.jpg)](https://i.imgur.com/gzVgrWK.jpg)
+![Image of poster](https://i.imgur.com/gzVgrWK.jpg)
 
 ## Screenshots & Video Demo
-[![Title Screen](https://i.imgur.com/w4KiTVy.jpg)](https://i.imgur.com/w4KiTVy.jpg)
+![Title Screen](https://i.imgur.com/w4KiTVy.jpg)
 (Video Demo coming!)
 
 ## Executable
