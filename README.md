@@ -6,10 +6,13 @@ _A fast-paced, stealth game where a rabbit escapes a land of eldritch horrors_
 
 ## Screenshots & Video Demo
 ![Title Screen](https://i.imgur.com/w4KiTVy.jpg)
-(Video Demo coming!)
+
+[![Video Demo](https://i.imgur.com/JxQVZQr.png)](https://youtu.be/XrdHOFmfsJI)
 
 ## Executable
-Check it out on [itch.io](https://beep-boppers.itch.io/down-the-rabbit-hole)
+Check it out on:
+
+[![itch.io logo](https://camo.githubusercontent.com/52a5daad8a276929bac59984f22b740a75b0d2e5/687474703a2f2f697463682e696f2f7374617469632f696d616765732f69746368696f2d626c61636b2e706e67)](https://beep-boppers.itch.io/down-the-rabbit-hole)
 
 ## Resources Used
 Audio/Font        | Source     
